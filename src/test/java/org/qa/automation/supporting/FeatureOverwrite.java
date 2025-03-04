@@ -7,7 +7,7 @@ package org.qa.automation.supporting;
 
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.*;
@@ -27,10 +27,8 @@ public class FeatureOverwrite {
     public static void overrideFeatureFiles(String parentDirectory) throws Throwable {
         try {
             setFileOverwriteList(parentDirectory);
-            Iterator<File> var1 = fileOverwriteList.iterator();
 
-            while (var1.hasNext()) {
-                File featureFile = (File)var1.next();
+            for (File featureFile : fileOverwriteList) {
                 List<String> featureWithExcelData = setExcelDataToFeature(featureFile);
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(featureFile), StandardCharsets.UTF_8));
                 Throwable var5 = null;
@@ -88,7 +86,7 @@ public class FeatureOverwrite {
                     String excelFilePath = null;
                     if (data.trim().contains("##@externaldata")) {
                         excelFilePath = data.substring(StringUtils.ordinalIndexOf(data, "@", 2) + 1, data.lastIndexOf("@"));
-                        sheetName = data.substring(data.lastIndexOf("@") + 1, data.length());
+                        sheetName = data.substring(data.lastIndexOf("@") + 1);
                         foundHashTag = true;
                         fileData.add(data);
                     }
@@ -97,9 +95,8 @@ public class FeatureOverwrite {
 
                         for (int rowNumber = 0; rowNumber < excelData.size() - 1; ++rowNumber) {
                             String cellData = "";
-
                             Map.Entry mapData;
-                            for (Iterator var12 = ((Map) excelData.get(rowNumber)).entrySet().iterator(); var12.hasNext(); cellData = cellData + "|" + (String) mapData.getValue()) {
+                            for (Iterator var12 = ((Map)excelData.get(rowNumber)).entrySet().iterator(); var12.hasNext(); cellData = cellData + "|" + (String) mapData.getValue()) {
                                 mapData = (Map.Entry) var12.next();
                             }
                             fileData.add(ExcelMultiline.escapeLineBreak(cellData) + "|");
