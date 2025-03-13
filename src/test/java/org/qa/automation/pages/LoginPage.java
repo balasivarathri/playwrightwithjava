@@ -37,12 +37,18 @@ public class LoginPage {
         enterLoginText(userName);
         enterPasswordText(password);
         clickLoginButton();
-        Thread.sleep(15000);
+        Thread.sleep(5000);
         Report.screenshot(scenario);
     }
     public void validateErrorMessage(){
-        String errorMes = page.locator(errorMessage).textContent();
-        System.out.println(errorMes);
-        Report.log(scenario,"Validated message is : " + errorMes);
+        String actualErrorMes = page.locator(errorMessage).textContent();
+        String expectedErrorMes = "Epic sadface: Sorry, this user has been locked out.";
+        System.out.println(actualErrorMes);
+        if (actualErrorMes.equals(expectedErrorMes)) {
+            System.out.println("Message validated successfully!");
+        } else {
+            System.out.println("Message validation failed. Expected: " + expectedErrorMes + " but got: " + actualErrorMes);
+        }
+        Report.log(scenario,"Validated message is : " + actualErrorMes);
     }
 }

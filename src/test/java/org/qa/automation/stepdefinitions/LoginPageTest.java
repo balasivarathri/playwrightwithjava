@@ -20,7 +20,6 @@ public class LoginPageTest extends TestBase {
     public void user_should_be_able_to_login_with_given_parameters_username_and_password(String username, String password) throws InterruptedException {
         loginPage = testContextSetup.pageObjectManager.loginPage();
         loginPage.loginTest(username,password);
-        loginPage.validateErrorMessage();
     }
 
     @When("^User should be on Login Page$")
@@ -30,7 +29,7 @@ public class LoginPageTest extends TestBase {
 
     @Then("^User should validate all the fields$")
     public void user_should_validate_all_the_fields() {
-
+        loginPage.validateErrorMessage();
     }
 
 }

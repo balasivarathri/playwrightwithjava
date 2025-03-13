@@ -9,5 +9,5 @@ Feature: Validating Login page fields for Sauce Labs
     Examples:
       | userName        | password     |
     ##@externaldata@src/test/resources/data/Datasheet.xlsx@TESTDATA
-|standard_user|secret_sauce|
 |locked_out_user|secret_sauce|
+|standard_user|secret_sauce|
