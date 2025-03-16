@@ -13,7 +13,7 @@ public class ReportHelper {
         jsonFiles.add("target/jsonReports/cucumber-reports.json");
         String projectname = "UI-Report";
         Configuration configuration = new Configuration(reportOutputDirectory, projectname);
-        configuration.addClassifications("Platform","Windows10");
+        configuration.addClassifications("Platform","Windows11");
         configuration.addClassifications("Browser","Chrome");
         configuration.addClassifications("Environment","UAT");
         configuration.addClassifications("Test Team","APPLICATION_UAT");

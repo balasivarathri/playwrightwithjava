@@ -10,7 +10,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 public class RESTful {
-    private static final Logger log = (Logger) LoggerFactory.getILoggerFactory();
+
+    private static final Logger log = LoggerFactory.getLogger(RESTful.class);
 
     private RESTful() {
         throw new IllegalStateException("Class methods are static");
@@ -37,37 +38,37 @@ public class RESTful {
     }
 
     public static Response doGet(RequestSpecBuilder specBuilder) {
-        Response response = (Response) ((Response) ((RequestSpecification) RestAssured.given().spec(specBuilder.build()).log().uri().log().method().log().body()).get()).thenReturn();
+        Response response = RestAssured.given().spec(specBuilder.build()).log().uri().log().method().log().body().get().thenReturn();
         logoutResponseCode(response);
         return response;
     }
 
     public static Object doGet(RequestSpecBuilder specBuilder, Class<?> pojo) {
-        Response response = (Response) ((Response) ((RequestSpecification) RestAssured.given().spec(specBuilder.build()).log().uri().log().method().log().body()).get()).thenReturn();
+        Response response = RestAssured.given().spec(specBuilder.build()).log().uri().log().method().log().body().get().thenReturn();
         logoutResponseCode(response);
         return response.as(pojo);
     }
 
     public static Response doPost(RequestSpecBuilder specBuilder) {
-        Response response = (Response) ((Response) ((RequestSpecification) RestAssured.given().spec(specBuilder.build()).log().uri().log().method().log().body()).post()).thenReturn();
+        Response response = RestAssured.given().spec(specBuilder.build()).log().uri().log().method().log().body().post().thenReturn();
         logoutResponseCode(response);
         return response;
     }
 
     public static Response doDelete(RequestSpecBuilder specBuilder) {
-        Response response = (Response) ((Response) ((RequestSpecification) RestAssured.given().spec(specBuilder.build()).log().uri().log().method().log().body()).delete()).thenReturn();
+        Response response = RestAssured.given().spec(specBuilder.build()).log().uri().log().method().log().body().delete().thenReturn();
         logoutResponseCode(response);
         return response;
     }
 
     public static Response doPut(RequestSpecBuilder specBuilder) {
-        Response response = (Response) ((Response) ((RequestSpecification) RestAssured.given().spec(specBuilder.build()).log().uri().log().method().log().body()).put()).thenReturn();
+        Response response = RestAssured.given().spec(specBuilder.build()).log().uri().log().method().log().body().put().thenReturn();
         logoutResponseCode(response);
         return response;
     }
 
     public static Response doPatch(RequestSpecBuilder specBuilder) {
-        Response response = (Response) ((Response) ((RequestSpecification) RestAssured.given().spec(specBuilder.build()).log().uri().log().method().log().body()).patch()).thenReturn();
+        Response response = RestAssured.given().spec(specBuilder.build()).log().uri().log().method().log().body().patch().thenReturn();
         logoutResponseCode(response);
         return response;
     }
