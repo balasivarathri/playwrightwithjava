@@ -20,7 +20,6 @@ public class Dbconnections {
     }
 
     private Connection getDatabaseConnection(){
-//        return CoreDatabase.connectDB(dataBaseType, url, userName, password);
         return null;
     }
 
