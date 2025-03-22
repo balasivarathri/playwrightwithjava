@@ -1,7 +1,6 @@
 package org.qa.automation.pages;
 
 import com.microsoft.playwright.Page;
-import org.qa.automation.base.TestBase;
 import org.qa.automation.report.Report;
 
 import static org.qa.automation.base.TestBase.scenario;
@@ -40,7 +39,8 @@ public class LoginPage {
         Thread.sleep(5000);
         Report.screenshot(scenario);
     }
-    public void validateErrorMessage(){
+
+    public void validateErrorMessage() {
         String actualErrorMes = page.locator(errorMessage).textContent();
         String expectedErrorMes = "Epic sadface: Sorry, this user has been locked out.";
         System.out.println(actualErrorMes);
@@ -49,6 +49,6 @@ public class LoginPage {
         } else {
             System.out.println("Message validation failed. Expected: " + expectedErrorMes + " but got: " + actualErrorMes);
         }
-        Report.log(scenario,"Validated message is : " + actualErrorMes);
+        Report.log(scenario, "Validated message is : " + actualErrorMes);
     }
 }

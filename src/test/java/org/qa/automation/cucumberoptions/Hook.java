@@ -10,10 +10,7 @@ import org.qa.automation.testcontextsetup.TestContextSetup;
 @Slf4j
 public class Hook {
 
-    TestContextSetup testContextSetup;
-
-    public Hook(TestContextSetup testContextSetup) {
-        this.testContextSetup = testContextSetup;
+    public Hook() {
     }
 
     @Before(order = 0)

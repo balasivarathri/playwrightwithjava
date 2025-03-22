@@ -8,7 +8,7 @@ import java.io.IOException;
 public class TestContextSetup {
 
     public PageObjectManager pageObjectManager;
-    public static TestBase testBase;
+    public TestBase testBase;
 
     public TestContextSetup() throws IOException {
         testBase = new TestBase();

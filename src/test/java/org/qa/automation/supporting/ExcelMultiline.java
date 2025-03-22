@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ExcelMultiline {
-    private static final Logger log = LoggerFactory.getLogger(ExcelMultiline.class);
+    public static final Logger log = LoggerFactory.getLogger(ExcelMultiline.class);
 
     public ExcelMultiline() {
 

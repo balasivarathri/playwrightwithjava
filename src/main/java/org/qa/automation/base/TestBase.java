@@ -1,7 +1,6 @@
 package org.qa.automation.base;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.BrowserType.LaunchOptions;
 import io.cucumber.java.Scenario;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,7 +21,7 @@ public class TestBase {
         FileInputStream fileInputStream = new FileInputStream("src/main/java/config/config.properties");
         prop.load(fileInputStream);
         String browserName = prop.getProperty("browser");
-        this.url = prop.getProperty("url");
+        url = prop.getProperty("url");
         playwright = Playwright.create();
         switch (browserName.toLowerCase()) {
             case "chrome":

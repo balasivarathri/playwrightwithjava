@@ -22,8 +22,18 @@ public class BookApiTest {
         req.setBody(payload);
         return RESTful.doPost(req);
     }
-    public static Response getDogRequest(){
+    public static Response getBookRequest(){
         String apiOperation = "/api/unknown/2";
+        RequestSpecBuilder req = new RequestSpecBuilder();
+        req.setBaseUri(apiUrl);
+        req.setBasePath(apiOperation);
+        req.setRelaxedHTTPSValidation();
+        req.setContentType(ContentType.TEXT);
+        req.setAccept(ContentType.JSON);
+        return RESTful.doGet(req);
+    }
+    public static Response getListResourceRequest(){
+        String apiOperation = "api/unknown";
         RequestSpecBuilder req = new RequestSpecBuilder();
         req.setBaseUri(apiUrl);
         req.setBasePath(apiOperation);
