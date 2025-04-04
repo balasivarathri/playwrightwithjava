@@ -32,7 +32,7 @@
         -Dproject="Cucumber Junit PAF"
         -Dteam=PAF
         -Denvironment=SIT
-        -Dselenium=TRUE
+        -Dplaywright=TRUE
         -DsendEmail=TRUE
         -Dheadless=TRUE
         -Ddry-run=FALSE
@@ -43,7 +43,7 @@
 * project - Free text with a maximum character count of 35
 * team - Can be one of 'morongwa', 'ohm', 'isango' and 'pit'
 * environment - Can be one of 'dev', 'sit' or 'uat'
-* selenium - Can be one of 'true' or 'false'
+* playwright - Can be one of 'true' or 'false'
 * headless - Can be one of 'true' or 'false'
 * sendEmail - Can be one of 'true' or 'false'
 * dry-run - Can be one of 'true' or 'false'
