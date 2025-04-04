@@ -2,6 +2,7 @@ package org.qa.automation.pages;
 
 import com.microsoft.playwright.Page;
 import org.qa.automation.report.Report;
+import org.testng.Assert;
 
 import static org.qa.automation.base.TestBase.scenario;
 
@@ -44,6 +45,7 @@ public class LoginPage {
         String actualErrorMes = page.locator(errorMessage).textContent();
         String expectedErrorMes = "Epic sadface: Sorry, this user has been locked out.";
         System.out.println(actualErrorMes);
+        Assert.assertEquals(expectedErrorMes, actualErrorMes);
         if (actualErrorMes.equals(expectedErrorMes)) {
             System.out.println("Message validated successfully!");
         } else {

@@ -3,7 +3,6 @@ package org.qa.automation.stepdefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Test;
 import org.qa.automation.base.TestBase;
 import org.qa.automation.pages.LoginPage;
 import org.qa.automation.testcontextsetup.TestContextSetup;

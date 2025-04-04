@@ -5,7 +5,6 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.base.TestBase;
-import org.qa.automation.testcontextsetup.TestContextSetup;
 
 @Slf4j
 public class Hook {
@@ -15,6 +14,7 @@ public class Hook {
 
     @Before(order = 0)
     public void beforeScenario(Scenario scenario){
+
         TestBase.scenario = scenario;
         log.info("------ Scenario: START ------");
         log.info("Scenario Name: " + scenario.getName());

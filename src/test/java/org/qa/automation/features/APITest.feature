@@ -1,4 +1,4 @@
-@Login_Regression @MD-Functional_BooksApi_Feature
+@Regression_Pack @MD-Functional_BooksApi_Feature
 Feature: Validating User API creation
 
   @GetData_Feature_Valid
@@ -8,5 +8,6 @@ Feature: Validating User API creation
 
   @GetUser_Api_Gorest
   Scenario: Validating GET GOREST API reponse for Users
+
     Given User should be to hit the gorest api to get the user response
 #    Then User should validate all the responses

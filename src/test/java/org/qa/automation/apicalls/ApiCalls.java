@@ -7,7 +7,7 @@ import org.testng.Assert;
 
 import java.io.IOException;
 
-public class GetApiCall {
+public class ApiCalls {
 
 
     public static String getUsersApi() throws IOException {

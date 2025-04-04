@@ -6,7 +6,7 @@ import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.apicalls.BookApiTest;
-import org.qa.automation.apicalls.GetApiCall;
+import org.qa.automation.apicalls.ApiCalls;
 import org.qa.automation.base.TestBase;
 import org.qa.automation.report.Report;
 
@@ -23,7 +23,7 @@ public class BookAPITest extends TestBase {
 
     @Given("^User should be to hit the gorest api to get the user response$")
     public void user_should_be_to_hit_the_gorest_api_to_get_the_user_response() throws IOException {
-        String respons = GetApiCall.getUsersApi();
+        String respons = ApiCalls.getUsersApi();
         log.info(respons);
         Report.log(scenario, respons);
 //        Response response = BookApiTest.postBookRequest(finalPayload);

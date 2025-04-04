@@ -27,6 +27,9 @@ public class TestBase {
             case "chrome":
                 browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false).setArgs(List.of("--start-maximized")));
                 break;
+            case "edge":
+                browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(false).setArgs(List.of("--start-maximized")));
+                break;
             case "firefox":
                 browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(false).setArgs(List.of("--start-maximized")));
                 break;
