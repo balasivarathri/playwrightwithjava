@@ -1,4 +1,4 @@
-@Regression_Pack @MD-Functional_Login_Feature
+@MD-Functional_Login_Feature
 Feature: Validating Login page fields for Sauce Labs
 
   @Login_Feature_Valid

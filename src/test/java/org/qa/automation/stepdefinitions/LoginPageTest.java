@@ -5,7 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.qa.automation.base.TestBase;
 import org.qa.automation.pages.LoginPage;
-import org.qa.automation.testcontextsetup.TestContextSetup;
+import org.qa.automation.contextsetup.TestContextSetup;
 
 public class LoginPageTest extends TestBase {
 

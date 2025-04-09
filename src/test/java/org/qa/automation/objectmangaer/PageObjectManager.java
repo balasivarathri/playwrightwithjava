@@ -1,4 +1,4 @@
-package org.qa.automation.pageobjectmangaer;
+package org.qa.automation.objectmangaer;
 
 import com.microsoft.playwright.Page;
 import org.qa.automation.pages.*;

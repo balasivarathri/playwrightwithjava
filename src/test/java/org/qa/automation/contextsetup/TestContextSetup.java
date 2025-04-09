@@ -1,7 +1,7 @@
-package org.qa.automation.testcontextsetup;
+package org.qa.automation.contextsetup;
 
 import org.qa.automation.base.TestBase;
-import org.qa.automation.pageobjectmangaer.PageObjectManager;
+import org.qa.automation.objectmangaer.PageObjectManager;
 
 import java.io.IOException;
 

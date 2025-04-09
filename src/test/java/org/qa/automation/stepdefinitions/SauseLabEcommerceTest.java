@@ -5,7 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.qa.automation.pages.*;
-import org.qa.automation.testcontextsetup.TestContextSetup;
+import org.qa.automation.contextsetup.TestContextSetup;
 
 public class SauseLabEcommerceTest {
     TestContextSetup testContextSetup;
@@ -24,12 +24,12 @@ public class SauseLabEcommerceTest {
         sauceLoginPage = testContextSetup.pageObjectManager.sauceLoginPage();
         sauceLoginPage.userSauceLogin(username, password);
     }
-    @When("User should be navigated to Login Page")
-    public void user_should_be_navigated_to_login_page() {
+    @When("User should be navigated to Sauce Login Page")
+    public void user_should_be_navigated_to_sauce_login_page() {
         sauceLoginPage.userLoginPageScreenShot();
     }
-    @And("User should be on Login page")
-    public void user_should_be_on_login_page() {
+    @And("User should be on Sauce Login page")
+    public void user_should_be_on_sauce_login_page() {
         sauceLoginPage.getTheUrl();
     }
     @And("User can be able add the items to the cart")
@@ -48,5 +48,9 @@ public class SauseLabEcommerceTest {
         checkOutOverViewPage = testContextSetup.pageObjectManager.checkOutOverViewPage();
         checkOutOverViewPage.finishCheckOut();
         checkOutOverViewPage.logout();
+    }
+    @Then("^User should validate the error message$")
+    public void user_should_validate_the_error_fields() {
+        sauceLoginPage.validateErrorMessage();
     }
 }

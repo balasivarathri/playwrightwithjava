@@ -8,7 +8,7 @@ import org.qa.automation.restassured.RESTful;
 public class BookApiTest {
 
 //    private static final String apiUrl = "https://demoqa.com";
-    private static final String apiUrl = "https://reqres.in";
+    private static final String apiUrl = "https://reqres.in/Account/v1/User";
     private static final String dogApiUrl = "https://dog.ceo/api/breeds";
 
     public static Response postBookRequest(String payload){

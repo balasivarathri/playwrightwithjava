@@ -12,6 +12,9 @@ public class TestBase {
     public static Browser browser;
     public static BrowserContext browserContext;
     public static Page page;
+    public static APIRequest apiRequest;
+    public static APIRequestContext apiRequestContext;
+    public static APIResponse apiResponse;
     public static Properties prop;
     public static Scenario scenario;
     public String url;
@@ -47,5 +50,11 @@ public class TestBase {
         page = browserContext.newPage();
         page.navigate(url);
         return page;
+    }
+    public APIRequestContext apiInitialization(){
+        playwright = Playwright.create();
+        apiRequest = playwright.request();
+        apiRequestContext = apiRequest.newContext();
+        return apiRequestContext;
     }
 }
