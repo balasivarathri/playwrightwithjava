@@ -43,9 +43,9 @@ pipeline
 				publishHTML([allowMissing: false,
                                   alwaysLinkToLastBuild: false,
                                   keepAll: true,
-                                  reportDir: 'target',
-                                  reportFiles: '**/*.json',
-                                  reportName: 'HTML Report',
+                                  reportDir: 'target/cucumber-html-reports',
+                                  reportFiles: 'overview-features.html',
+                                  reportName: 'BALA HTML Report',
                                   reportTitles: ''])
             }
         }
