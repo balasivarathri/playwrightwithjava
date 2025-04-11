@@ -27,13 +27,11 @@ public class GoRestAPITest extends TestBase {
     public void user_should_be_to_hit_the_gorest_api_to_get_the_user_response() throws IOException {
         getApiCall = apiContextSetup.apiObjectManager.getApiCall();
         getApiCall.getApi();
-//        String response = ApiCalls.getUsersApi();
-//        log.info(response);
-//        Report.log(scenario, response);
-//        Response response = BookApiTest.postBookRequest(finalPayload);
-//        Report.log(scenario, "Payload has been successfully posted : " + finalPayload);
-//        Report.validate(scenario, "Message successfully posted", "Message was not posted successfully on the server", 200, response.getStatusCode());
-//        log.info("Response status code: " + response.getStatusCode());
+    }
+    @Given("^User should validate the response with specific Id$")
+    public void user_should_validate_the_response_with_specific_id() throws IOException {
+        getApiCall = apiContextSetup.apiObjectManager.getApiCall();
+        getApiCall.getSpecificUser();
     }
 
 
