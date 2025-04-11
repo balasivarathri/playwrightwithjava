@@ -12,8 +12,7 @@ pipeline
         {
 			steps
             {
-				git 'https://github.com/balasivarathri/playwrightwithjava.git'
-                 bat "mvn -Dmaven.test.failure.ignore=true clean package"
+				echo("deploy to qa")
             }
             post
             {
