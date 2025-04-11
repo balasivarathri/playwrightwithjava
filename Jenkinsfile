@@ -14,14 +14,6 @@ pipeline
             {
 				echo("deploy to qa")
             }
-            post
-            {
-				success
-                {
-					junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.jar'
-                }
-            }
         }
 
         stage("Deploy to QA"){
