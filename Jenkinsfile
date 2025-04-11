@@ -39,14 +39,14 @@ pipeline
                 }
             }
         }
-        stage('Publish Extent Report'){
+        stage('Publish HTML Report'){
 			steps{
 				publishHTML([allowMissing: false,
                                   alwaysLinkToLastBuild: false,
                                   keepAll: true,
                                   reportDir: 'target',
                                   reportFiles: '**/*.json',
-                                  reportName: 'HTML Extent Report',
+                                  reportName: 'HTML Report',
                                   reportTitles: ''])
             }
         }
