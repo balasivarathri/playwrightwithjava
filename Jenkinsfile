@@ -32,17 +32,5 @@ pipeline
                 }
             }
         }
-
-        stage('Publish HTML Report'){
-            steps{
-                     publishHTML([allowMissing: false,
-                                  alwaysLinkToLastBuild: false,
-                                  keepAll: true,
-                                  reportDir: 'cucumber-html-reports',
-                                  reportFiles: 'overview-features.html',
-                                  reportName: 'HTML Report',
-                                  reportTitles: ''])
-            }
-        }
     }
 }
