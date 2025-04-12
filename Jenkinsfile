@@ -8,21 +8,22 @@ pipeline
 
     stages
     {
-		stage('Build')
+		stage('Dev')
         {
 			steps
             {
-				echo("deploy to qa")
+				echo("deploy to SIT")
             }
         }
 
-        stage("Deploy to QA"){
-			steps{
-				echo("deploy to qa")
+        stage("SIT"){
+			steps
+            {
+				echo("deploy to UAT")
             }
         }
 
-        stage('Regression Automation Test') {
+        stage('UAT') {
 			steps {
 				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
 					git 'https://github.com/balasivarathri/playwrightwithjava.git'
