@@ -11,11 +11,11 @@ variables:
   mavenVersion: '4'
 
 steps:
- - task: JavaToolInstaller@0
+- task: JavaToolInstaller@0
   inputs:
-    versionSpec: '17'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
+    versionSpec: '17'                 # Java version
+    jdkArchitectureOption: 'x64'     # Architecture
+    jdkSourceOption: 'Microsoft'     # ✅ Required: Use Microsoft-built JDK
   displayName: 'Install Java 17'
 
   - task: Maven@4
