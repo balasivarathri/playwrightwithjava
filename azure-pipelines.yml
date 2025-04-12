@@ -21,15 +21,3 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-  - stage: PublishReport
-    displayName: 'Publish HTML Report'
-    jobs:
-      - job: ReportJob
-        steps:
-          - task: PublishBuildArtifacts@1
-            displayName: 'Publish HTML Report'
-            inputs:
-              PathtoPublish: 'target/cucumber-html-reports'
-              ArtifactName: 'BALA_HTML_Report'
-              publishLocation: 'Container'
-
