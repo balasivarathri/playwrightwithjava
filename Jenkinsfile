@@ -8,29 +8,22 @@ pipeline
 
     stages
     {
-		stage('Build')
+		stage('Dev')
         {
 			steps
             {
-				echo("deploy to qa")
+				echo("deploy to SIT")
             }
-            post
+        }
+
+        stage("SIT"){
+			steps
             {
-				success
-                {
-					junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.jar'
-                }
+				echo("deploy to UAT")
             }
         }
 
-        stage("Deploy to QA"){
-			steps{
-				echo("deploy to qa")
-            }
-        }
-
-        stage('Regression Automation Test') {
+        stage('UAT') {
 			steps {
 				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
 					git 'https://github.com/balasivarathri/playwrightwithjava.git'
