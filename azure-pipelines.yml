@@ -8,14 +8,15 @@ pool:
 
 variables:
   javaVersion: '17'
-  mavenVersion: '3.8.5'
+  mavenVersion: '4'
 
 steps:
   - task: JavaToolInstaller@0
     inputs:
       versionSpec: '17'
-      jdkArchitecture: 'x64'
-    displayName: '17'
+      jdkArchitectureOption: 'x64'
+    displayName: 'Install Java 17'
+
 
   - task: Maven@4
     displayName: 'Build and Run Playwright Java Tests'
