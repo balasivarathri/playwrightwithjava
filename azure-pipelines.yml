@@ -7,16 +7,16 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  javaVersion: '11'
+  javaVersion: '17'
   mavenVersion: '4'
 
 steps:
-  - task: JavaToolInstaller@0
-    inputs:
-      versionSpec: '11'
-      jdkArchitectureOption: 'x64'
-    displayName: 'Install Java 11'
-
+ - task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '17'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+  displayName: 'Install Java 17'
 
   - task: Maven@4
     displayName: 'Build and Run Playwright Java Tests'
