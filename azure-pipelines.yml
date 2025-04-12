@@ -7,15 +7,15 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  javaVersion: '17'
+  javaVersion: '11'
   mavenVersion: '4'
 
 steps:
   - task: JavaToolInstaller@0
     inputs:
-      versionSpec: '17'
+      versionSpec: '11'
       jdkArchitectureOption: 'x64'
-    displayName: 'Install Java 17'
+    displayName: 'Install Java 11'
 
 
   - task: Maven@4
