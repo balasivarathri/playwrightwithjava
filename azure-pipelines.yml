@@ -9,37 +9,17 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-stages:
-  - stage: Dev
-    displayName: 'Dev Stage'
-    jobs:
-      - job: DevJob
-        steps:
-          - script: echo "deploy to SIT"
-            displayName: 'Dev - Deploy to SIT'
-
-  - stage: SIT
-    displayName: 'SIT Stage'
-    jobs:
-      - job: SITJob
-        steps:
-          - script: echo "deploy to UAT"
-            displayName: 'SIT - Deploy to UAT'
-
-  - stage: UAT
-    displayName: 'UAT Stage'
-    jobs:
-      - job: UATJob
-        continueOnError: true  # Equivalent to Jenkins catchError
-        steps:
-          - task: GitClone@1
-            inputs:
-              repository: 'https://github.com/balasivarathri/playwrightwithjava.git'
-              cleanOptions: 'true'
-
-          - script: |
-              mvn clean install
-            displayName: 'Build with Maven'
+steps:
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
 
   - stage: PublishReport
     displayName: 'Publish HTML Report'
