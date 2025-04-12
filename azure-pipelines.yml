@@ -7,7 +7,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  javaVersion: '11'
+  javaVersion: '17'
   mavenVersion: '3.8.5'
 
 steps:
