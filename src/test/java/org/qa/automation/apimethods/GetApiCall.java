@@ -71,6 +71,7 @@ public class GetApiCall extends TestBase {
         Map<String, Object> firstUser = speUsers.get(0);
         ob.enable(SerializationFeature.INDENT_OUTPUT);
         System.out.println("Full JSON object:\n" + ob.writeValueAsString(firstUser));
+        System.out.println("Thank you for set up");
 //        System.out.println(specificUser.get());
 //        System.out.println(apiResponse.url());
 
