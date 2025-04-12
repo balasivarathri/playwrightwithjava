@@ -13,9 +13,9 @@ variables:
 steps:
   - task: JavaToolInstaller@0
     inputs:
-      versionSpec: '$(javaVersion)'
+      versionSpec: '17'
       jdkArchitecture: 'x64'
-    displayName: 'Install Java $(javaVersion)'
+    displayName: '17'
 
   - task: Maven@4
     displayName: 'Build and Run Playwright Java Tests'
