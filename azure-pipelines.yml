@@ -33,4 +33,4 @@ steps:
     displayName: 'Publish HTML Test Report'
     inputs:
       PathtoPublish: 'target/cucumber-html-reports'
-      ArtifactName: 'TestReport'
+      ArtifactName: 'Bala HTML Test Report'
