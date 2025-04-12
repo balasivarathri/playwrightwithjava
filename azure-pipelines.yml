@@ -6,17 +6,9 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-variables:
-  javaVersion: '17'
-  mavenVersion: '4'
-
 steps:
-  - task: JavaToolInstaller@0
-    inputs:
-      versionSpec: '17'
-      jdkArchitectureOption: 'x64'
-      jdkSourceOption: 'Microsoft'
-    displayName: 'Install Java 17'
+  - script: java -version
+    displayName: 'Check Java Version'
 
   - task: Maven@4
     displayName: 'Build and Run Playwright Java Tests'
@@ -24,8 +16,8 @@ steps:
       mavenPomFile: 'pom.xml'
       goals: 'clean test'
       options: '-Dmaven.test.failure.ignore=false'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
+      javaHomeOption: 'Path'
+      jdkDirectory: '/usr/lib/jvm/java-17-openjdk-amd64'  # For Ubuntu agents (or leave blank for default)
       mavenVersionOption: 'Default'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
