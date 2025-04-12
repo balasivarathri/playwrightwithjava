@@ -16,8 +16,8 @@ steps:
       mavenPomFile: 'pom.xml'
       goals: 'clean test'
       options: '-Dmaven.test.failure.ignore=false'
-      javaHomeOption: 'Path'
-      jdkDirectory: '/usr/lib/jvm/java-17-openjdk-amd64'  # For Ubuntu agents (or leave blank for default)
+      javaHomeOption: 'JDKVersion'         # Use built-in JDK
+      jdkVersionOption: '1.17'             # Java 17 (exact version supported)
       mavenVersionOption: 'Default'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
