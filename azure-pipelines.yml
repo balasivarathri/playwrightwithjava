@@ -13,9 +13,9 @@ variables:
 steps:
 - task: JavaToolInstaller@0
   inputs:
-    versionSpec: '17'                 # Java version
-    jdkArchitectureOption: 'x64'     # Architecture
-    jdkSourceOption: 'Microsoft'     # ✅ Required: Use Microsoft-built JDK
+    versionSpec: '17'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'Microsoft'
   displayName: 'Install Java 17'
 
   - task: Maven@4
