@@ -8,7 +8,7 @@ pool:
 
 steps:
   - script: java -version
-    displayName: 'Check Java Version'
+    displayName: '17'
 
   - task: Maven@4
     displayName: 'Build and Run Playwright Java Tests'
@@ -16,8 +16,8 @@ steps:
       mavenPomFile: 'pom.xml'
       goals: 'clean test'
       options: '-Dmaven.test.failure.ignore=false'
-      javaHomeOption: 'JDKVersion'         # Use built-in JDK
-      jdkVersionOption: '1.17'             # Java 17 (exact version supported)
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.17'
       mavenVersionOption: 'Default'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
@@ -36,8 +36,8 @@ steps:
       ArtifactName: 'Bala HTML Test Report'
 
   - task: PublishHtmlReport@1
-  inputs:
-    reportDir: 'target/cucumber-html-reports'
-    reportTitle: 'Cucumber Test Report'
-    reportName: 'Bala Test Report'
-    
+    displayName: 'Publish Cucumber HTML Report in Azure'
+    inputs:
+      reportDir: 'target/cucumber-html-reports/overview-features.html'
+      reportTitle: 'Cucumber Test Report'
+      reportName: 'Bala Test Report'
