@@ -34,3 +34,10 @@ steps:
     inputs:
       PathtoPublish: 'target/cucumber-html-reports'
       ArtifactName: 'Bala HTML Test Report'
+
+  - task: PublishHtmlReport@1
+  inputs:
+    reportDir: 'target/cucumber-html-reports'
+    reportTitle: 'Cucumber Test Report'
+    reportName: 'Bala Test Report'
+    
