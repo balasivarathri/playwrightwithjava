@@ -37,7 +37,6 @@ pipeline
                                   alwaysLinkToLastBuild: false,
                                   keepAll: true,
                                   reportDir: 'target/cucumber-html-reports',
-                                  reportFiles: 'overview-features.html',
                                   reportName: 'BALA HTML Report',
                                   reportTitles: ''])
             }
