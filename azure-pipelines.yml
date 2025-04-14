@@ -38,6 +38,7 @@ steps:
   - task: PublishHtmlReport@1
     displayName: 'Publish Cucumber HTML Report in Azure'
     inputs:
-      reportDir: 'target/cucumber-html-reports/overview-features.html'
+      reportDir: 'target/cucumber-html-reports'
+      reportFiles: 'overview-features.html'
       reportTitle: 'Cucumber Test Report'
       reportName: 'Bala Test Report'
