@@ -6,11 +6,27 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-stages:
-  - stage: Build
-    displayName: 'Build & Test Stage'
+stages: 
+  - stage: Dev
+    displayName: 'Dev Stage'
     jobs:
-      - job: BuildJob
+      - job: DevJob
+        steps:
+          - script: echo "Deploy to SIT"
+            displayName: 'Dev - Deploy to SIT'
+
+  - stage: SIT
+    displayName: 'SIT Stage'
+    jobs:
+      - job: SITJob
+        steps:
+          - script: echo "Deploy to UAT"
+            displayName: 'SIT - Deploy to UAT'
+
+  - stage: UAT
+    displayName: 'UAT Stage'
+    jobs:
+      - job: UATJob
         steps:
           - script: java -version
             displayName: 'Check Java Version'
@@ -48,19 +64,3 @@ stages:
               useFilenameTabs: true
               reportTitle: 'Cucumber Test Report'
               reportName: 'Bala Test Report'
-
-  - stage: Dev
-    displayName: 'Dev Stage'
-    jobs:
-      - job: DevJob
-        steps:
-          - script: echo "Deploy to SIT"
-            displayName: 'Dev - Deploy to SIT'
-
-  - stage: SIT
-    displayName: 'SIT Stage'
-    jobs:
-      - job: SITJob
-        steps:
-          - script: echo "Deploy to UAT"
-            displayName: 'SIT - Deploy to UAT'
