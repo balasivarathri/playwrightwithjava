@@ -57,9 +57,7 @@ stages:
               ArtifactName: 'Bala HTML Test Report'
 
           - task: PublishHtmlReport@1
-            displayName: 'Publish Cucumber HTML Report in Azure'
             inputs:
-              reportDir: 'target/cucumber-html-reports'
+              reportDir: '$(System.DefaultWorkingDirectory)/target/cucumber-html-reports'
               reportIndexFile: 'overview-features.html'
-              reportTitle: 'Cucumber Test Report'
-              reportName: 'Bala Test Report'
+              reportName: 'UI Automation Report'
