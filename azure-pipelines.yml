@@ -6,51 +6,55 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-steps:
-  - script: java -version
-    displayName: 'Check Java Version'
-
-  - task: Maven@4
-    displayName: 'Build and Run Playwright Java Tests'
-    inputs:
-      mavenPomFile: 'pom.xml'
-      goals: 'clean test'
-      options: '-Dmaven.test.failure.ignore=false'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.17'
-      mavenVersionOption: 'Default'
-      publishJUnitResults: true
-      testResultsFiles: '**/surefire-reports/TEST-*.xml'
-
-  - task: PublishTestResults@2
-    displayName: 'Publish JUnit Test Results'
-    inputs:
-      testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      testRunTitle: 'Playwright Java Test Results'
-      failTaskOnFailedTests: true
-
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish HTML Test Report'
-    inputs:
-      PathtoPublish: 'target/cucumber-html-reports'
-      ArtifactName: 'Bala HTML Test Report'
-
-  - task: PublishHtmlReport@1
-    displayName: 'Publish Cucumber HTML Report in Azure'
-    inputs:
-      reportDir: 'target/cucumber-html-reports'
-      reportIndexFile: 'overview-features.html'
-      useFilenameTabs: true
-      reportTitle: 'Cucumber Test Report'
-      reportName: 'Bala Test Report'
-
 stages:
+  - stage: Build
+    displayName: 'Build & Test Stage'
+    jobs:
+      - job: BuildJob
+        steps:
+          - script: java -version
+            displayName: 'Check Java Version'
+
+          - task: Maven@4
+            displayName: 'Build and Run Playwright Java Tests'
+            inputs:
+              mavenPomFile: 'pom.xml'
+              goals: 'clean test'
+              options: '-Dmaven.test.failure.ignore=false'
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: '1.17'
+              mavenVersionOption: 'Default'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+
+          - task: PublishTestResults@2
+            displayName: 'Publish JUnit Test Results'
+            inputs:
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              testRunTitle: 'Playwright Java Test Results'
+              failTaskOnFailedTests: true
+
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish HTML Test Report'
+            inputs:
+              PathtoPublish: 'target/cucumber-html-reports'
+              ArtifactName: 'Bala HTML Test Report'
+
+          - task: PublishHtmlReport@1
+            displayName: 'Publish Cucumber HTML Report in Azure'
+            inputs:
+              reportDir: 'target/cucumber-html-reports'
+              reportIndexFile: 'overview-features.html'
+              useFilenameTabs: true
+              reportTitle: 'Cucumber Test Report'
+              reportName: 'Bala Test Report'
+
   - stage: Dev
     displayName: 'Dev Stage'
     jobs:
       - job: DevJob
         steps:
-          - script: echo "deploy to SIT"
+          - script: echo "Deploy to SIT"
             displayName: 'Dev - Deploy to SIT'
 
   - stage: SIT
@@ -58,5 +62,5 @@ stages:
     jobs:
       - job: SITJob
         steps:
-          - script: echo "deploy to UAT"
+          - script: echo "Deploy to UAT"
             displayName: 'SIT - Deploy to UAT'
