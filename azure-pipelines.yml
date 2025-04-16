@@ -58,6 +58,7 @@ stages:
 
           - task: PublishHtmlReport@1
             inputs:
-              reportDir: '$(System.DefaultWorkingDirectory)/target/cucumber-html-reports'
+              reportDir: 'target/cucumber-html-reports/overview-features.html'
               reportIndexFile: 'overview-features.html'
+              useFilenameTabs: true
               reportName: 'UI Automation Report'
