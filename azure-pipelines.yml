@@ -58,7 +58,7 @@ stages:
 
           - task: PublishHtmlReport@1
             inputs:
-              reportDir: 'target/cucumber-html-reports'
+              reportDir: 'target/cucumber-html-reports/overview-features.html'
               reportFiles: 'overview-features.html'
               useFilenameTabs: true
               reportName: 'UI Automation Report'
