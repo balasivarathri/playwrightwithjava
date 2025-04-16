@@ -8,7 +8,7 @@ pool:
 
 stages: 
   - stage: Dev
-    displayName: 'Dev Stage'
+    displayName: 'Dev Environment'
     jobs:
       - job: DevJob
         steps:
@@ -16,7 +16,7 @@ stages:
             displayName: 'Dev - Deploy to SIT'
 
   - stage: SIT
-    displayName: 'SIT Stage'
+    displayName: 'SIT Environment'
     jobs:
       - job: SITJob
         steps:
@@ -24,7 +24,7 @@ stages:
             displayName: 'SIT - Deploy to UAT'
 
   - stage: UAT
-    displayName: 'UAT Stage'
+    displayName: 'UAT Environment'
     jobs:
       - job: UATJob
         steps:
@@ -61,6 +61,5 @@ stages:
             inputs:
               reportDir: 'target/cucumber-html-reports'
               reportIndexFile: 'overview-features.html'
-              useFilenameTabs: true
               reportTitle: 'Cucumber Test Report'
               reportName: 'Bala Test Report'
