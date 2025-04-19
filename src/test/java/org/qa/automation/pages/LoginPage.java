@@ -2,6 +2,7 @@ package org.qa.automation.pages;
 
 import com.microsoft.playwright.Page;
 import org.qa.automation.report.Report;
+import org.qa.automation.supporting.ExcelMultiline;
 import org.testng.Assert;
 
 import static org.qa.automation.base.TestBase.scenario;

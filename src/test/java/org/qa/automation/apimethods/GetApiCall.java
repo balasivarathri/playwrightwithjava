@@ -60,7 +60,6 @@ public class GetApiCall extends TestBase {
         System.out.println(firstUser.get("id"));
         System.out.println(firstUser.get("name"));
         System.out.println(firstUser.get("email"));
-
     }
     public void getSpecificUser() throws JsonProcessingException {
         apiResponse = apiRequestContext.get("https://gorest.co.in/public/v2/users",
@@ -71,9 +70,7 @@ public class GetApiCall extends TestBase {
         Map<String, Object> firstUser = speUsers.get(0);
         ob.enable(SerializationFeature.INDENT_OUTPUT);
         System.out.println("Full JSON object:\n" + ob.writeValueAsString(firstUser));
-        System.out.println("Thank you");
 //        System.out.println(specificUser.get());
 //        System.out.println(apiResponse.url());
-
     }
 }

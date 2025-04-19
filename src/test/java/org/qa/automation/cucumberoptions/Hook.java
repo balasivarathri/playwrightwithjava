@@ -1,27 +1,30 @@
 package org.qa.automation.cucumberoptions;
 
+import com.microsoft.playwright.Tracing;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.base.TestBase;
 
-@Slf4j
-public class Hook {
+import java.nio.file.Paths;
 
+@Slf4j
+public class Hook extends TestBase {
     public Hook() {
     }
 
     @Before(order = 0)
-    public void beforeScenario(Scenario scenario){
-
+    public void beforeScenario(Scenario scenario) {
         TestBase.scenario = scenario;
         log.info("------ Scenario: START ------");
         log.info("Scenario Name: " + scenario.getName());
     }
 
     @After(order = 0)
-    public void afterScenario(Scenario scenario){
+    public void afterScenario(Scenario scenario) {
+        browserContext.tracing().stop(new Tracing.StopOptions()
+                .setPath(Paths.get("trace.zip")));
         log.info("Scenarios Result: " + scenario.getStatus());
         log.info("------ Scenario: END ------");
     }
