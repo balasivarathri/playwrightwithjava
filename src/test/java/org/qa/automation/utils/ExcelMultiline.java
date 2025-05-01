@@ -1,4 +1,4 @@
-package org.qa.automation.supporting;
+package org.qa.automation.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

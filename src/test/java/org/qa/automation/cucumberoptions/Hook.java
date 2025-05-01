@@ -23,8 +23,6 @@ public class Hook extends TestBase {
 
     @After(order = 0)
     public void afterScenario(Scenario scenario) {
-        browserContext.tracing().stop(new Tracing.StopOptions()
-                .setPath(Paths.get("trace.zip")));
         log.info("Scenarios Result: " + scenario.getStatus());
         log.info("------ Scenario: END ------");
     }

@@ -6,7 +6,6 @@ import io.cucumber.java.en.When;
 import org.qa.automation.base.TestBase;
 import org.qa.automation.pages.LoginPage;
 import org.qa.automation.contextsetup.TestContextSetup;
-import org.qa.automation.supporting.ExcelMultiline;
 
 public class LoginPageTest extends TestBase {
 

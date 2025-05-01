@@ -11,7 +11,7 @@ public class ReportHelper {
         File reportOutputDirectory = new File("target");
         ArrayList<String> jsonFiles = new ArrayList<>();
         jsonFiles.add("target/jsonReports/cucumber-reports.json");
-        String projectname = "UI-Report";
+        String projectname = "Playwright-HTML-Report";
         Configuration configuration = new Configuration(reportOutputDirectory, projectname);
         configuration.addClassifications("Platform","Windows11");
         configuration.addClassifications("Browser","Chrome");

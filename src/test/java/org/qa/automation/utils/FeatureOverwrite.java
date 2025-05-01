@@ -1,4 +1,4 @@
-package org.qa.automation.supporting;
+package org.qa.automation.utils;
 
 //
 //

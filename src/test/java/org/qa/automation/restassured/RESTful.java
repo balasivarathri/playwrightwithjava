@@ -84,7 +84,6 @@ public class RESTful {
             log.info("Service call response code : " + responseCode);
         } else {
             log.warn("Service call response code : " + responseCode);
-
         }
     }
 }

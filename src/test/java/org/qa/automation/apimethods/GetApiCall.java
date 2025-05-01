@@ -1,21 +1,21 @@
 package org.qa.automation.apimethods;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.options.RequestOptions;
+import io.cucumber.cienvironment.internal.com.eclipsesource.json.Json;
 import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.base.TestBase;
 import org.qa.automation.report.Report;
 import org.testng.Assert;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +37,7 @@ public class GetApiCall extends TestBase {
         Report.validate(scenario, "Status Code has successfully extracted", "Status Code has successfully extracted", 200, statusCode);
         System.out.println(apiResponse.headers().get("content-type"));
         String url = apiResponse.url();
-        Report.log(scenario,"Extracted url from Response Body is  :  "+ url);
+        Report.log(scenario, "Extracted url from Response Body is  :  " + url);
         System.out.println("Extracted url from Response Body is  : " + url);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -53,7 +53,8 @@ public class GetApiCall extends TestBase {
 
 
         String res = apiResponse.text();
-        List<Map<String, Object>> users = objectMapper.readValue(res, new TypeReference<List<Map<String, Object>>>() {});
+        List<Map<String, Object>> users = objectMapper.readValue(res, new TypeReference<>() {
+        });
         Map<String, Object> firstUser = users.get(2);
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         System.out.println("Full JSON object:\n" + objectMapper.writeValueAsString(firstUser));
@@ -61,16 +62,21 @@ public class GetApiCall extends TestBase {
         System.out.println(firstUser.get("name"));
         System.out.println(firstUser.get("email"));
     }
-    public void getSpecificUser() throws JsonProcessingException {
-        apiResponse = apiRequestContext.get("https://gorest.co.in/public/v2/users",
-                RequestOptions.create().setQueryParam("id",7820278));
-        String specificUser = apiResponse.text();
-        ObjectMapper ob = new ObjectMapper();
-        List<Map<String, Object>> speUsers = ob.readValue(specificUser, new TypeReference<>() {});
-        Map<String, Object> firstUser = speUsers.get(0);
-        ob.enable(SerializationFeature.INDENT_OUTPUT);
-        System.out.println("Full JSON object:\n" + ob.writeValueAsString(firstUser));
-//        System.out.println(specificUser.get());
-//        System.out.println(apiResponse.url());
+
+    public void getSpecificUser(int idNumber) throws IOException {
+        apiResponse = apiRequestContext.get("https://gorest.co.in/public/v2/users/",
+                RequestOptions.create()
+                        .setHeader("Authorization", "Bearer eb3d22363bc05c6d9c439f5f904234e971f50cbdff3cf4a8c03980aeec74ff5a")
+                        .setQueryParam("id", idNumber));
+
+        int statusCode = apiResponse.status();
+        System.out.println("Extracted status code for get api is : " + statusCode);
+
+        ObjectMapper om = new ObjectMapper();
+        JsonNode jsonResponse = om.readTree(apiResponse.body());
+        String jsonBody = jsonResponse.toPrettyString();
+        System.out.println("GET API Reponse JsonBody is : \n" + jsonBody);
+        Report.log(scenario, "GET API Reponse JsonBody is : \n" + jsonBody);
     }
+
 }
