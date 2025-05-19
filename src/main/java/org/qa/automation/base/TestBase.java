@@ -47,12 +47,12 @@ public class TestBase {
                 break;
         }
         browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(null));
+        page = browserContext.newPage();
+        page.navigate(url);
         browserContext.tracing().start(new Tracing.StartOptions()
                 .setScreenshots(true)
                 .setSnapshots(true)
                 .setSources(true));
-        page = browserContext.newPage();
-        page.navigate(url);
         return page;
     }
     public APIRequestContext apiInitialization(){

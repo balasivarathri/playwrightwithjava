@@ -5,7 +5,7 @@ import org.qa.automation.pages.*;
 
 public class PageObjectManager {
 
-    public LoginPage loginPage;
+    public SalesForceLoginPage loginPage;
     public SauceLoginPage sauceLoginPage;
     public InventoryPage inventoryPage;
     public CartPage cartPage;
@@ -16,8 +16,8 @@ public class PageObjectManager {
         this.page = page;
     }
 
-    public LoginPage loginPage() {
-        loginPage = new LoginPage(page);
+    public SalesForceLoginPage loginPage() {
+        loginPage = new SalesForceLoginPage(page);
         return loginPage;
     }
 

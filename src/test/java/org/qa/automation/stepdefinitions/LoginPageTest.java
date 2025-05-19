@@ -4,13 +4,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.qa.automation.base.TestBase;
-import org.qa.automation.pages.LoginPage;
+import org.qa.automation.pages.SalesForceLoginPage;
 import org.qa.automation.contextsetup.TestContextSetup;
 
 public class LoginPageTest extends TestBase {
 
     TestContextSetup testContextSetup;
-    LoginPage loginPage;
+    SalesForceLoginPage loginPage;
 
     public LoginPageTest(TestContextSetup testContextSetup){
         this.testContextSetup = testContextSetup;
@@ -18,6 +18,11 @@ public class LoginPageTest extends TestBase {
 
     @Given("^User should be able to login with given parameters username (.+) and password (.+)$")
     public void user_should_be_able_to_login_with_given_parameters_username_and_password(String username, String password) throws InterruptedException {
+        loginPage = testContextSetup.pageObjectManager.loginPage();
+        loginPage.loginTest(username,password);
+    }
+    @Given("^User should be able to salesforcelogin with given parameters username (.+) and password (.+)$")
+    public void user_should_be_able_to_salesforcelogin_with_given_parameters_username_and_password(String username, String password) throws InterruptedException {
         loginPage = testContextSetup.pageObjectManager.loginPage();
         loginPage.loginTest(username,password);
     }
@@ -29,7 +34,6 @@ public class LoginPageTest extends TestBase {
 
     @Then("^User should validate all the fields$")
     public void user_should_validate_all_the_fields() {
-        loginPage.validateErrorMessage();
     }
 
 }

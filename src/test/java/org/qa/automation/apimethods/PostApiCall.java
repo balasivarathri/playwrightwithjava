@@ -12,10 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.base.TestBase;
 import org.qa.automation.report.Report;
 import org.testng.Assert;
-
 import java.io.IOException;
 import java.util.Map;
-
 import static org.qa.automation.utils.Payloads.generateThreeDigitNumber;
 
 @Slf4j
@@ -23,7 +21,6 @@ public class PostApiCall extends TestBase {
 
     APIRequestContext apiRequestContext;
     APIResponse apiResponse;
-    String jsonResponseBody;
 
     public PostApiCall(APIRequestContext apiRequestContext) {
         this.apiRequestContext = apiRequestContext;
@@ -41,7 +38,7 @@ public class PostApiCall extends TestBase {
         apiResponse = apiRequestContext.post("https://gorest.co.in/public/v2/users",
                 RequestOptions.create()
                         .setHeader("Content-Type", "application/json")
-                        .setHeader("Authorization", "Bearer eb3d22363bc05c6d9c439f5f904234e971f50cbdff3cf4a8c03980aeec74ff5a")
+                        .setHeader("Authorization", "Bearer 509d2c5e3ed6879c6e88a3438220f77cadf61957088e8495c0348bb80934f969")
                         .setData(users));
         String responseText = apiResponse.text();
         int statusCode = apiResponse.status();

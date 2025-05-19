@@ -40,8 +40,8 @@ public class TestRunner {
     public static void teardown() {
         log.warn("------ Teardown: START ------");
         Processor.initializeTeardown(executionDateTime);
-        browserContext.tracing().stop(new Tracing.StopOptions()
-                .setPath(Paths.get("trace.zip")));
+//        browserContext.tracing().stop(new Tracing.StopOptions()
+//                .setPath(Paths.get("trace.zip")));
         log.info("Teardown: END ------");
     }
 }

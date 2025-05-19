@@ -1,15 +1,12 @@
 package org.qa.automation.apimethods;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.options.RequestOptions;
-import io.cucumber.cienvironment.internal.com.eclipsesource.json.Json;
 import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.base.TestBase;
 import org.qa.automation.report.Report;
@@ -53,10 +50,9 @@ public class GetApiCall extends TestBase {
 
 
         String res = apiResponse.text();
-        List<Map<String, Object>> users = objectMapper.readValue(res, new TypeReference<>() {
-        });
-        Map<String, Object> firstUser = users.get(2);
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        List<Map<String, Object>> users = objectMapper.readValue(res, new TypeReference<>() {});
+        Map<String, Object> firstUser = users.get(0);
+//        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         System.out.println("Full JSON object:\n" + objectMapper.writeValueAsString(firstUser));
         System.out.println(firstUser.get("id"));
         System.out.println(firstUser.get("name"));
@@ -66,7 +62,7 @@ public class GetApiCall extends TestBase {
     public void getSpecificUser(int idNumber) throws IOException {
         apiResponse = apiRequestContext.get("https://gorest.co.in/public/v2/users/",
                 RequestOptions.create()
-                        .setHeader("Authorization", "Bearer eb3d22363bc05c6d9c439f5f904234e971f50cbdff3cf4a8c03980aeec74ff5a")
+                        .setHeader("Authorization", "Bearer 509d2c5e3ed6879c6e88a3438220f77cadf61957088e8495c0348bb80934f969")
                         .setQueryParam("id", idNumber));
 
         int statusCode = apiResponse.status();

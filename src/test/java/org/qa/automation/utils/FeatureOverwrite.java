@@ -6,10 +6,12 @@ package org.qa.automation.utils;
 //
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -19,7 +21,7 @@ public class FeatureOverwrite {
     private static final Logger log = LoggerFactory.getLogger(FeatureOverwrite.class);
     private static final String tag = System.getProperty("cucumber.filter.tags");
     private static final String[] fileExt = new String[]{"feature"};
-    private static final List<File> fileOverwriteList = new ArrayList();
+    private static final List<File> fileOverwriteList = new ArrayList<>();
 
     public FeatureOverwrite() {
     }
@@ -71,56 +73,91 @@ public class FeatureOverwrite {
     }
 
     private static List<String> setExcelDataToFeature(File featureFile) throws IOException {
-        List<String> fileData = new ArrayList();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream(featureFile)), StandardCharsets.UTF_8));
-        Throwable var3 = null;
+        List<String> fileData = new ArrayList<>();
+        BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(new BufferedInputStream(new FileInputStream(featureFile)), StandardCharsets.UTF_8)
+        );
+        Throwable exception = null;
 
         try {
             boolean foundHashTag = false;
             boolean featureData = false;
 
             while (true) {
-                String data;
-                while ((data = bufferedReader.readLine()) != null) {
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
                     String sheetName = null;
                     String excelFilePath = null;
-                    if (data.trim().contains("##@externaldata")) {
-                        excelFilePath = data.substring(StringUtils.ordinalIndexOf(data, "@", 2) + 1, data.lastIndexOf("@"));
-                        sheetName = data.substring(data.lastIndexOf("@") + 1);
-                        foundHashTag = true;
-                        fileData.add(data);
-                    }
-                    if (foundHashTag) {
-                        List excelData = (new ExcelReaderForOverwrite()).getData(featureFile.getPath(), excelFilePath, sheetName);
 
-                        for (int rowNumber = 0; rowNumber < excelData.size() - 1; ++rowNumber) {
-                            String cellData = "";
-                            Map.Entry mapData;
-                            for (Iterator var12 = ((Map)excelData.get(rowNumber)).entrySet().iterator(); var12.hasNext(); cellData = cellData + "|" + (String) mapData.getValue()) {
-                                mapData = (Map.Entry) var12.next();
-                            }
-                            fileData.add(ExcelMultiline.escapeLineBreak(cellData) + "|");
+                    if (line.trim().contains("##@externaldata")) {
+                        excelFilePath = line.substring(StringUtils.ordinalIndexOf(line, "@", 2) + 1, line.lastIndexOf("@"));
+                        sheetName = line.substring(line.lastIndexOf("@") + 1);
+                        foundHashTag = true;
+                        fileData.add(line);
+                    }
+
+                    if (foundHashTag) {
+                        List<Map<String, String>> excelData = new ExcelReaderForOverwrite().getData(
+                                featureFile.getPath(), excelFilePath, sheetName
+                        );
+
+                        // Get headers and calculate max column widths
+                        Map<String, Integer> columnWidths = new LinkedHashMap<>();
+                        for (String key : excelData.get(0).keySet()) {
+                            columnWidths.put(key, key.length());
                         }
+
+                        for (Map<String, String> row : excelData) {
+                            for (Map.Entry<String, String> entry : row.entrySet()) {
+                                int len = entry.getValue() != null ? entry.getValue().length() : 0;
+                                columnWidths.put(entry.getKey(), Math.max(columnWidths.get(entry.getKey()), len));
+                            }
+                        }
+
+                        // Create header row
+                        StringBuilder headerRow = new StringBuilder();
+                        for (String key : columnWidths.keySet()) {
+                            headerRow.append("| ").append(padRight(key, columnWidths.get(key))).append(" ");
+                        }
+                        headerRow.append("|");  // Close the final column
+
+                        fileData.add(headerRow.toString());
+
+                        // Create data rows
+                        for (Map<String, String> row : excelData) {
+                            boolean isEmptyRow = row.values().stream().allMatch(v -> v == null || v.trim().isEmpty());
+                            if (isEmptyRow) continue;  // skip blank Excel rows
+
+                            StringBuilder dataRow = new StringBuilder();
+                            for (String key : columnWidths.keySet()) {
+                                String value = row.getOrDefault(key, "");
+                                dataRow.append("| ").append(padRight(value, columnWidths.get(key))).append(" ");
+                            }
+                            dataRow.append("|");
+                            fileData.add(ExcelMultiline.escapeLineBreak(dataRow.toString()));
+                        }
+
+
                         foundHashTag = false;
                         featureData = true;
-                    } else if (!data.startsWith("|") && !data.endsWith("|")) {
+                    } else if (!line.startsWith("|") && !line.endsWith("|")) {
                         featureData = false;
-                        fileData.add(data);
+                        fileData.add(line);
                     } else if (!featureData) {
-                        fileData.add(data);
+                        fileData.add(line);
                     }
                 }
                 return fileData;
             }
-        } catch (Throwable var21) {
-            var3 = var21;
-            throw var21;
+        } catch (Throwable t) {
+            exception = t;
+            throw t;
         } finally {
-            if (var3 != null) {
+            if (exception != null) {
                 try {
                     bufferedReader.close();
-                } catch (Throwable var20) {
-                    var3.addSuppressed(var20);
+                } catch (Throwable suppressed) {
+                    exception.addSuppressed(suppressed);
                 }
             } else {
                 bufferedReader.close();
@@ -128,4 +165,9 @@ public class FeatureOverwrite {
         }
     }
 
+    // Utility method to pad strings for column alignment
+    private static String padRight(String text, int length) {
+        if (text == null) text = "";
+        return String.format("%-" + length + "s", text);
+    }
 }
