@@ -14,56 +14,47 @@ import org.slf4j.LoggerFactory;
 public class CustomRunner extends Runner {
 
     private static final Logger log = LoggerFactory.getLogger(CustomRunner.class);
-    private final Class<Cucumber> classValue;
+    private final Class<?> testClass;
     private Cucumber cucumber;
 
-    public CustomRunner(Class<Cucumber> classValue) throws Exception {
-        this.classValue = classValue;
-        this.cucumber= new Cucumber(classValue);
+    public CustomRunner(Class<?> testClass) throws Exception {
+        this.testClass = testClass;
+        this.cucumber = new Cucumber(testClass);
     }
 
+    @Override
     public Description getDescription() {
         return this.cucumber.getDescription();
     }
 
-    private void runAnnotatedMethods(Class<?> annotation) throws Exception{
-        if(annotation.isAnnotation()) {
-            Method[] methods = this.classValue.getMethods();
-            Method[] var3 = methods;
-            int var4 = methods.length;
-
-            for (int var5 = 0; var5 < var4; ++var5){
-                Method method = var3[var5];
-
-                Annotation[] annotations = method.getAnnotations();
-                Annotation[] var8 = annotations;
-                int var9 = annotations.length;
-
-                for(int var10 = 0; var10 < var9; ++var10) {
-                    Annotation item =  var8[var10];
-                    if(item.annotationType().equals(annotation)){
-                        method.invoke((Object)null);
+    private void runAnnotatedMethods(Class<? extends Annotation> annotation) throws Exception {
+        if (annotation.isAnnotation()) {
+            for (Method method : testClass.getMethods()) {
+                for (Annotation item : method.getAnnotations()) {
+                    if (item.annotationType().equals(annotation)) {
+                        method.invoke(null);
                         break;
                     }
                 }
             }
         }
-
     }
 
+    @Override
     public void run(RunNotifier notifier) {
-        try{
+        try {
             this.runAnnotatedMethods(Initialize.class);
-            this.cucumber = new Cucumber(this.classValue);
-        } catch(Exception var4) {
-            var4.printStackTrace();
+            this.cucumber = new Cucumber(this.testClass);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         this.cucumber.run(notifier);
 
-        try{
+        try {
             this.runAnnotatedMethods(TearDown.class);
-        } catch(Exception var3) {
-            var3.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

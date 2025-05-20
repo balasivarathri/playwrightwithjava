@@ -8,11 +8,7 @@ import org.qa.automation.runner.CustomRunner;
 import org.qa.automation.processor.Initialize;
 import org.qa.automation.processor.Processor;
 import org.qa.automation.processor.TearDown;
-
 import java.io.IOException;
-import java.nio.file.Paths;
-
-import static org.qa.automation.base.TestBase.browserContext;
 
 @Slf4j
 @RunWith(CustomRunner.class)
