@@ -54,7 +54,7 @@ stages:
             displayName: 'Publish HTML Test Report'
             inputs:
               PathtoPublish: 'target/cucumber-html-reports'
-              ArtifactName: 'Bala HTML Test Report'
+              ArtifactName: 'Customised HTML Test Report'
 
           - task: PublishHtmlReport@1
             inputs:
