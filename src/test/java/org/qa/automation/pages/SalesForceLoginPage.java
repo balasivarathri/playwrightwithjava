@@ -3,7 +3,9 @@ package org.qa.automation.pages;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import org.qa.automation.report.Report;
+import org.qa.automation.utils.Url;
 
+import static org.qa.automation.base.TestBase.page;
 import static org.qa.automation.base.TestBase.scenario;
 
 public class SalesForceLoginPage {
@@ -53,7 +55,8 @@ public class SalesForceLoginPage {
         appsLink.click();
     }
 
-    public void loginTest(String userName, String password) {
+    public void salesForceLoginTest(String url, String userName, String password) {
+        page.navigate(Url.getUrl(url));
         enterUsername(userName);
         enterPassword(password);
         clickLogin();

@@ -4,6 +4,7 @@ import com.microsoft.playwright.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.base.TestBase;
 import org.qa.automation.report.Report;
+import org.qa.automation.utils.Url;
 import org.testng.Assert;
 
 @Slf4j
@@ -21,7 +22,8 @@ public class SauceLoginPage extends TestBase {
     public String expectedUrl = "https://www.saucedemo.com/inventory.html";
     public String errorMessage = "h3[data-test='error']";
 
-    public void userSauceLogin(String user, String password) {
+    public void userSauceLogin(String url, String user, String password) {
+        page.navigate(Url.getUrl(url));
         page.fill(userName, user);
         page.fill(saucePassword, password);
         page.click(login);

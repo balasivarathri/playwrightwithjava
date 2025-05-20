@@ -16,15 +16,10 @@ public class LoginPageTest extends TestBase {
         this.testContextSetup = testContextSetup;
     }
 
-    @Given("^User should be able to login with given parameters username (.+) and password (.+)$")
-    public void user_should_be_able_to_login_with_given_parameters_username_and_password(String username, String password) throws InterruptedException {
+    @Given("^User should be able to salesforcelogin with given parameters url (.+), username (.+) and password (.+)$")
+    public void user_should_be_able_to_salesforcelogin_with_given_parameters_url_username_and_password(String url, String username, String password) throws InterruptedException {
         loginPage = testContextSetup.pageObjectManager.loginPage();
-        loginPage.loginTest(username,password);
-    }
-    @Given("^User should be able to salesforcelogin with given parameters username (.+) and password (.+)$")
-    public void user_should_be_able_to_salesforcelogin_with_given_parameters_username_and_password(String username, String password) throws InterruptedException {
-        loginPage = testContextSetup.pageObjectManager.loginPage();
-        loginPage.loginTest(username,password);
+        loginPage.salesForceLoginTest(url, username, password);
     }
 
     @When("^User should be on Login Page$")

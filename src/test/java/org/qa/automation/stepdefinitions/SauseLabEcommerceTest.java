@@ -19,10 +19,10 @@ public class SauseLabEcommerceTest {
     }
 
 
-    @Given("^User should be able to saucelogin with given parameters username (.+) and password (.+)$")
-    public void user_should_be_able_to_saucelogin_with_given_parameters_username_and_password(String username, String password) {
+    @Given("^User should be able to saucelogin with given parameters url (.+) username (.+) and password (.+)$")
+    public void user_should_be_able_to_saucelogin_with_given_parameters_url_username_and_password(String url, String username, String password) {
         sauceLoginPage = testContextSetup.pageObjectManager.sauceLoginPage();
-        sauceLoginPage.userSauceLogin(username, password);
+        sauceLoginPage.userSauceLogin(url,username, password);
     }
     @When("User should be navigated to Sauce Login Page")
     public void user_should_be_navigated_to_sauce_login_page() {
