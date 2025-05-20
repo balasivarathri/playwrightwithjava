@@ -1,8 +1,8 @@
 @Regression_Pack @Login_Page_Test
-Feature: Validating the login page functionality
+Feature: Validating the login page functionality for Sauce Labs application
 
   @Login_Page_Test_Valid
-  Scenario Outline: Verify that the user login page with valid credentials
+  Scenario Outline: Verify that the user login page with valid credentials for sauce labs application
     Given User should be able to saucelogin with given parameters url <url> username <userName> and password <password>
     When User should be navigated to Sauce Login Page
     And User should be on Sauce Login page
@@ -16,7 +16,7 @@ Feature: Validating the login page functionality
 | saucelabs | standard_user | secret_sauce |
 
   @Login_Page_Test_InValid
-  Scenario Outline: Verify that the user login page with invalid credentials
+  Scenario Outline: Verify that the user login page with invalid credentials for sauce labs application
     Given User should be able to saucelogin with given parameters url <url> username <userName> and password <password>
     When User should be navigated to Sauce Login Page
     Then User should validate the error message
