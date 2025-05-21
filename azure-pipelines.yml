@@ -37,23 +37,26 @@ stages:
               versionSpec: '18.x'
             displayName: 'Install Node.js'
 
-          # Print directory structure to verify location of package.json
-          - script: tree /F
-            displayName: 'Print Full Directory Tree'
+          # List root directory
+          - script: dir
+            displayName: 'List Root Directory'
 
-          # Install backend dependencies from swagger-api-server folder
+          # List swagger-api-server directory
+          - script: dir swagger-api-server
+            displayName: 'List swagger-api-server Directory'
+
+          # Install Swagger API dependencies
           - script: |
               cd swagger-api-server
-              dir
               npm install
-            displayName: 'Install Backend Dependencies'
+            displayName: 'Install Swagger API Dependencies'
 
-          # Start backend server in background
+          # Start Swagger API server
           - script: |
               cd swagger-api-server
-              start /B cmd /C "npm start"
+              start /B cmd /C "node server.js"
               timeout /t 10
-            displayName: 'Start Backend Server'
+            displayName: 'Start Swagger API Server'
 
           # Run Playwright Java Tests
           - task: Maven@4
