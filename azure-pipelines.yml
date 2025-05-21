@@ -37,17 +37,18 @@ stages:
               versionSpec: '18.x'
             displayName: 'Install Node.js'
 
-          # List root directory to locate package.json
-          - script: dir
-            displayName: 'List Root Directory'
+          # Print directory structure to verify location of package.json
+          - script: tree /F
+            displayName: 'Print Full Directory Tree'
 
-          # Install backend dependencies (adjusted to swagger-api-server)
+          # Install backend dependencies from swagger-api-server folder
           - script: |
               cd swagger-api-server
+              dir
               npm install
             displayName: 'Install Backend Dependencies'
 
-          # Start backend server in background (adjusted to swagger-api-server)
+          # Start backend server in background
           - script: |
               cd swagger-api-server
               start /B cmd /C "npm start"
