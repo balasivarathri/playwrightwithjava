@@ -29,7 +29,7 @@ public class Processor {
 
     public static void setTeamFeatureDirectory() throws IOException {
         prop = new Properties();
-        FileInputStream fs = new FileInputStream("src/main/java/config/config.properties");
+        FileInputStream fs = new FileInputStream("src/main/java/org/qa/automation/config/config.properties");
         prop.load(fs);
         String var0 = prop.getProperty("team").toLowerCase();
         byte var1 = -1;
