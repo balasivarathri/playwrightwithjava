@@ -89,4 +89,7 @@ stages:
           # Publish HTML Test Report Viewer (optional UI viewer task)
           - task: PublishHtmlReport@1
             inputs:
-              reportDir: 'target/cucumber
+              reportDir: 'target/cucumber-html-reports'
+              reportFiles: 'overview-features.html'
+              useFilenameTabs: true
+              reportName: 'UI Automation Report'
