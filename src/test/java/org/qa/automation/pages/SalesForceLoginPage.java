@@ -39,23 +39,27 @@ public class SalesForceLoginPage {
 
     public void clickLogin() {
         loginButton.click();
+
     }
 
-    public void clickSetup() {
+    public void clickSetup() throws InterruptedException {
+        setupLink.wait(3000);
         setupLink.click();
     }
 
-    public void clickCreate() {
+    public void clickCreate() throws InterruptedException {
         createLink.scrollIntoViewIfNeeded();
+        createLink.wait(3000);;
         createLink.click();
     }
 
-    public void clickApps() {
+    public void clickApps() throws InterruptedException {
         appsLink.scrollIntoViewIfNeeded();
+        appsLink.wait(3000);;
         appsLink.click();
     }
 
-    public void salesForceLoginTest(String url, String userName, String password) {
+    public void salesForceLoginTest(String url, String userName, String password) throws InterruptedException {
         page.navigate(Url.getUrl(url));
         enterUsername(userName);
         enterPassword(password);
