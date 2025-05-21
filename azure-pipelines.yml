@@ -37,13 +37,17 @@ stages:
               versionSpec: '18.x'
             displayName: 'Install Node.js'
 
-          # Install backend dependencies
+          # List root directory to locate package.json
+          - script: dir
+            displayName: 'List Root Directory'
+
+          # Install backend dependencies (adjust "cd backend" if needed)
           - script: |
               cd backend
               npm install
             displayName: 'Install Backend Dependencies'
 
-          # Start backend server in background
+          # Start backend server in background (adjust "cd backend" if needed)
           - script: |
               cd backend
               start /B cmd /C "npm start"
