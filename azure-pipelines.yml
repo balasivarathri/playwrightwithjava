@@ -6,7 +6,7 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-stages: 
+stages:
   - stage: Dev
     displayName: 'Dev Environment'
     jobs:
@@ -31,6 +31,26 @@ stages:
           - script: java -version
             displayName: 'Check Java Version'
 
+          # Install Node.js
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '18.x'
+            displayName: 'Install Node.js'
+
+          # Install backend dependencies
+          - script: |
+              cd backend
+              npm install
+            displayName: 'Install Backend Dependencies'
+
+          # Start backend server in background
+          - script: |
+              cd backend
+              start /B cmd /C "npm start"
+              timeout /t 10
+            displayName: 'Start Backend Server'
+
+          # Run Playwright Java Tests
           - task: Maven@4
             displayName: 'Build and Run Playwright Java Tests'
             inputs:
@@ -43,6 +63,7 @@ stages:
               publishJUnitResults: true
               testResultsFiles: '**/surefire-reports/TEST-*.xml'
 
+          # Publish JUnit Test Results
           - task: PublishTestResults@2
             displayName: 'Publish JUnit Test Results'
             inputs:
@@ -50,12 +71,14 @@ stages:
               testRunTitle: 'Playwright Java Test Results'
               failTaskOnFailedTests: true
 
+          # Publish HTML Test Report Artifact
           - task: PublishBuildArtifacts@1
             displayName: 'Publish HTML Test Report'
             inputs:
               PathtoPublish: 'target/cucumber-html-reports'
               ArtifactName: 'Bala HTML Test Report'
 
+          # Publish HTML Test Report Viewer
           - task: PublishHtmlReport@1
             inputs:
               reportDir: 'target/cucumber-html-reports/overview-features.html'
