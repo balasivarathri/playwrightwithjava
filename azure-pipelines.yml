@@ -41,15 +41,15 @@ stages:
           - script: dir
             displayName: 'List Root Directory'
 
-          # Install backend dependencies (adjust "cd backend" if needed)
+          # Install backend dependencies (adjusted to swagger-api-server)
           - script: |
-              cd backend
+              cd swagger-api-server
               npm install
             displayName: 'Install Backend Dependencies'
 
-          # Start backend server in background (adjust "cd backend" if needed)
+          # Start backend server in background (adjusted to swagger-api-server)
           - script: |
-              cd backend
+              cd swagger-api-server
               start /B cmd /C "npm start"
               timeout /t 10
             displayName: 'Start Backend Server'
