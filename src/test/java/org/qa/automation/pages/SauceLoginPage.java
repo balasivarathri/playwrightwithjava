@@ -1,30 +1,44 @@
 package org.qa.automation.pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.base.TestBase;
 import org.qa.automation.report.Report;
+import org.qa.automation.utils.Url;
 import org.testng.Assert;
 
 @Slf4j
 public class SauceLoginPage extends TestBase {
 
-    public Page page;
+
+    private final Locator sauceUserName;
+    private final Locator saucePassword;
+    private final Locator login;
+    private final Locator errorMessage;
 
     public SauceLoginPage(Page page) {
-        this.page = page;
+        this.sauceUserName = page.locator("//input[@placeholder='Username']");
+        this.saucePassword = page.locator("//input[@placeholder='Password']");
+        this.login = page.locator("//input[@name='login-button']");
+        this.errorMessage = page.locator("h3[data-test='error']");
     }
 
-    public String userName = "//input[@placeholder='Username']";
-    public String saucePassword = "//input[@placeholder='Password']";
-    public String login = "//input[@name='login-button']";
-    public String expectedUrl = "https://www.saucedemo.com/inventory.html";
-    public String errorMessage = "h3[data-test='error']";
+    public void enterUsername(String username) {
+        sauceUserName.fill(username);
+    }
+    public void enterPassword(String password) {
+        saucePassword.fill(password);
+    }
+    public void clickLogin() {
+        login.click();
+    }
 
-    public void userSauceLogin(String user, String password) {
-        page.fill(userName, user);
-        page.fill(saucePassword, password);
-        page.click(login);
+    public void userSauceLogin(String url, String userName, String password) {
+        page.navigate(Url.getUrl(url));
+        enterUsername(userName);
+        enterPassword(password);
+        clickLogin();
         Report.log(scenario, "User has successfully logged in");
     }
 
@@ -34,12 +48,13 @@ public class SauceLoginPage extends TestBase {
 
     public void getTheUrl() {
         String actualUrl = page.url();
+        String expectedUrl = "https://www.saucedemo.com/inventory.html";
         Assert.assertEquals(actualUrl, expectedUrl);
         Report.log(scenario, "Assertion passed and Actual Url is : " + actualUrl);
     }
 
     public void validateErrorMessage() {
-        String actualErrorMes = page.locator(errorMessage).textContent();
+        String actualErrorMes = errorMessage.textContent();
         String expectedErrorMes = "Epic sadface: Sorry, this user has been locked out.";
         log.info("Actual Error Message is : " + actualErrorMes);
         Assert.assertEquals(expectedErrorMes, actualErrorMes);

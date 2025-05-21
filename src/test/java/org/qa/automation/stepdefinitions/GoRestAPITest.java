@@ -7,6 +7,7 @@ import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.apicalls.BookApiTest;
 import org.qa.automation.apimethods.GetApiCall;
+import org.qa.automation.apimethods.PostApiCall;
 import org.qa.automation.base.TestBase;
 import org.qa.automation.report.Report;
 import org.qa.automation.contextsetup.ApiContextSetup;
@@ -18,11 +19,21 @@ public class GoRestAPITest extends TestBase {
 
     ApiContextSetup apiContextSetup;
     GetApiCall getApiCall;
+    PostApiCall postApiCall;
+    int idNumber;
 
     public GoRestAPITest(ApiContextSetup apiContextSetup) {
         this.apiContextSetup = apiContextSetup;
     }
-
+    @Given("User should be hit the POST gorest API to create the user")
+    public void user_should_be_hit_the_post_gorest_api_to_create_the_user() throws IOException {
+        postApiCall = apiContextSetup.apiObjectManager.postApiCall();
+        postApiCall.postApi();
+    }
+    @Then("User should be validate the reponse and verify user has been created")
+    public void user_should_be_validate_the_reponse_and_verify_user_has_been_created() throws IOException {
+        idNumber = postApiCall.validatePostApiResponse();
+    }
     @Given("^User should be to hit the gorest api to get the user response$")
     public void user_should_be_to_hit_the_gorest_api_to_get_the_user_response() throws IOException {
         getApiCall = apiContextSetup.apiObjectManager.getApiCall();
@@ -31,9 +42,8 @@ public class GoRestAPITest extends TestBase {
     @Given("^User should validate the response with specific Id$")
     public void user_should_validate_the_response_with_specific_id() throws IOException {
         getApiCall = apiContextSetup.apiObjectManager.getApiCall();
-        getApiCall.getSpecificUser();
+        getApiCall.getSpecificUser(idNumber);
     }
-
 
 //    @Given("^User should be able to login with given parameters payload (.+)$")
 //    public void user_should_be_able_to_login_with_given_parameters_username_and_password(String payload) throws InterruptedException {

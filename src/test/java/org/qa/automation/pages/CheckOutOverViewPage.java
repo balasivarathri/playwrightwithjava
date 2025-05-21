@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.report.Report;
 import org.testng.Assert;
 
-import java.security.PublicKey;
-
 import static org.qa.automation.base.TestBase.scenario;
 
 @Slf4j

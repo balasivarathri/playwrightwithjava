@@ -17,14 +17,12 @@ public class TestBase {
     public static APIResponse apiResponse;
     public static Properties prop;
     public static Scenario scenario;
-    public String url;
 
     public Page browserInitialization() throws IOException {
         prop = new Properties();
-        FileInputStream fileInputStream = new FileInputStream("src/main/java/config/config.properties");
+        FileInputStream fileInputStream = new FileInputStream("src/main/java/org/qa/automation/config/config.properties");
         prop.load(fileInputStream);
         String browserName = prop.getProperty("browser");
-        url = prop.getProperty("url");
         playwright = Playwright.create();
         switch (browserName.toLowerCase()) {
             case "chrome":
@@ -48,7 +46,10 @@ public class TestBase {
         }
         browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(null));
         page = browserContext.newPage();
-        page.navigate(url);
+        browserContext.tracing().start(new Tracing.StartOptions()
+                .setScreenshots(true)
+                .setSnapshots(true)
+                .setSources(true));
         return page;
     }
     public APIRequestContext apiInitialization(){

@@ -1,4 +1,4 @@
-package architecture;
+package org.qa.automation.architecture;
 
 import lombok.extern.log4j.Log4j;
 
