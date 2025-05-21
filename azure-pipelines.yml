@@ -37,6 +37,10 @@ stages:
               versionSpec: '18.x'
             displayName: 'Install Node.js'
 
+          # ✅ Print public IP of the agent
+          - script: powershell -Command "Invoke-RestMethod -Uri 'https://api.ipify.org'"
+            displayName: 'Print Agent Public IP'
+
           # List root directory to verify structure
           - script: dir
             displayName: 'List Root Directory'
@@ -85,7 +89,4 @@ stages:
           # Publish HTML Test Report Viewer (optional UI viewer task)
           - task: PublishHtmlReport@1
             inputs:
-              reportDir: 'target/cucumber-html-reports'
-              reportFiles: 'overview-features.html'
-              useFilenameTabs: true
-              reportName: 'UI Automation Report'
+              reportDir: 'target/cucumber
