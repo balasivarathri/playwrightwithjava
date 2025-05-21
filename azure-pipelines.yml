@@ -31,32 +31,28 @@ stages:
           - script: java -version
             displayName: 'Check Java Version'
 
-          # Install Node.js
+          # Install Node.js (for Swagger API server)
           - task: NodeTool@0
             inputs:
               versionSpec: '18.x'
             displayName: 'Install Node.js'
 
-          # List root directory
+          # List root directory to verify structure
           - script: dir
             displayName: 'List Root Directory'
 
-          # List swagger-api-server directory
-          - script: dir swagger-api-server
-            displayName: 'List swagger-api-server Directory'
-
-          # Install Swagger API dependencies
+          # Install Swagger API server dependencies
           - script: |
               cd swagger-api-server
               npm install
-            displayName: 'Install Swagger API Dependencies'
+            displayName: 'Install Swagger API Server Dependencies'
 
-          # Start Swagger API server
-          - script: |
+          # Start Swagger API Server in background using PowerShell
+          - powershell: |
               cd swagger-api-server
-              start /B cmd /C "node server.js"
-              timeout /t 10
-            displayName: 'Start Swagger API Server'
+              Start-Process "node" -ArgumentList "server.js" -NoNewWindow
+              Start-Sleep -Seconds 10
+            displayName: 'Start Swagger API Server in Background'
 
           # Run Playwright Java Tests
           - task: Maven@4
@@ -86,10 +82,10 @@ stages:
               PathtoPublish: 'target/cucumber-html-reports'
               ArtifactName: 'Bala HTML Test Report'
 
-          # Publish HTML Test Report Viewer
+          # Publish HTML Test Report Viewer (optional UI viewer task)
           - task: PublishHtmlReport@1
             inputs:
-              reportDir: 'target/cucumber-html-reports/overview-features.html'
+              reportDir: 'target/cucumber-html-reports'
               reportFiles: 'overview-features.html'
               useFilenameTabs: true
               reportName: 'UI Automation Report'
