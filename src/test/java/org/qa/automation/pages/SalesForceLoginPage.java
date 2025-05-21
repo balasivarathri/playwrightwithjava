@@ -2,6 +2,7 @@ package org.qa.automation.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.WaitForSelectorState;
 import org.qa.automation.report.Report;
 import org.qa.automation.utils.Url;
 
@@ -42,20 +43,21 @@ public class SalesForceLoginPage {
 
     }
 
-    public void clickSetup() throws InterruptedException {
-        setupLink.wait(3000);
+    public void clickSetup() {
+        setupLink.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
         setupLink.click();
     }
 
+
     public void clickCreate() throws InterruptedException {
         createLink.scrollIntoViewIfNeeded();
-        createLink.wait(3000);;
+        createLink.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
         createLink.click();
     }
 
     public void clickApps() throws InterruptedException {
         appsLink.scrollIntoViewIfNeeded();
-        appsLink.wait(3000);;
+        appsLink.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
         appsLink.click();
     }
 
