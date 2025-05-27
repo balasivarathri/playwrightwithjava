@@ -32,6 +32,11 @@ public class SauseLabEcommerceTest {
     public void user_should_be_on_sauce_login_page() {
         sauceLoginPage.getTheUrl();
     }
+    @And("User should be able to see the all items from dropdown")
+    public void user_should_be_able_to_see_the_all_items_from_dropdown() {
+        inventoryPage = testContextSetup.pageObjectManager.inventoryPage();
+        inventoryPage.clickItemsDropDown();
+    }
     @And("User can be able add the items to the cart")
     public void user_can_able_add_the_items_to_the_cart() {
         inventoryPage = testContextSetup.pageObjectManager.inventoryPage();

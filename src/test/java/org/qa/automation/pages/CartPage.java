@@ -1,5 +1,6 @@
 package org.qa.automation.pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.report.Report;
@@ -9,29 +10,48 @@ import static org.qa.automation.base.TestBase.scenario;
 @Slf4j
 public class CartPage {
 
-    public Page page;
+    private final Locator checkOutButton;
+    private final Locator enterFristName;
+    private final Locator enterLastName;
+    private final Locator enterPostalCode;
+    private final Locator continueButton;
+
 
     public CartPage(Page page) {
-        this.page = page;
+        this.checkOutButton = page.locator("//button[@name='checkout']");
+        this.enterFristName = page.locator("input[placeholder='First Name']");
+        this.enterLastName = page.locator("//input[@placeholder='Last Name']");
+        this.enterPostalCode = page.locator("//input[@placeholder='Zip/Postal Code']");
+        this.continueButton = page.locator("//input[@name='continue']");
     }
 
-    public String checkOutButton = "//button[@name='checkout']";
-    public String enterFristName = "input[placeholder='First Name']";
-    public String enterLastName = "//input[@placeholder='Last Name']";
-    public String enterPostalCode = "//input[@placeholder='Zip/Postal Code']";
-    public String continueButton = "//input[@name='continue']";
+    public void clickCheckOutButton() {
+        checkOutButton.click();
+    }
+
+    public void enterFristName(String firstName) {
+        enterFristName.fill(firstName);
+    }
+    public void enterLastName(String lastName) {
+        enterLastName.fill(lastName);
+    }
+    public void enterPostalCode(String postalCode) {
+        enterPostalCode.fill(postalCode);
+    }
+    public void clickcontinueButton() {
+        continueButton.click();
+    }
 
     public void doTheCheckOutProcess() {
         Report.log(scenario,"Verify that the two added items are displayed in the cart with the correct names and prices");
         Report.screenshot(scenario);
-        page.click(checkOutButton);
+        clickCheckOutButton();
     }
     public void enterTheCheckOutDetails(){
-        page.fill(enterFristName,"John");
-        page.fill(enterLastName,"Doe");
-        page.fill(enterPostalCode,"12345");
-        page.click(continueButton);
+        enterFristName("Balu");
+        enterLastName("Sivarathri");
+        enterPostalCode("1686");
+        clickcontinueButton();
         Report.screenshot(scenario);
-
     }
 }

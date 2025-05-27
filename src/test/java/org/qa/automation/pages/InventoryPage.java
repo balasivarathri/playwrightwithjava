@@ -1,5 +1,6 @@
 package org.qa.automation.pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.report.Report;
@@ -10,25 +11,49 @@ import static org.qa.automation.base.TestBase.scenario;
 @Slf4j
 public class InventoryPage {
 
-    public Page page;
+    private final Locator firstItem;
+    private final Locator secondItem;
+    private final Locator cartIcon;
+    private final Locator itemsDropDown;
 
     public InventoryPage(Page page) {
-        this.page = page;
+        this.firstItem = page.locator("//button[@name='add-to-cart-sauce-labs-backpack']");
+        this.secondItem = page.locator("//button[@name='add-to-cart-sauce-labs-bike-light']");
+        this.cartIcon = page.locator("//a[@data-test='shopping-cart-link']");
+        this.itemsDropDown = page.locator("//select[@data-test='product-sort-container']");
     }
 
-    public String firstItem = "//button[@name='add-to-cart-sauce-labs-backpack']";
-    public String secondItem = "//button[@name='add-to-cart-sauce-labs-bike-light']";
-    public String cartIcon = "//a[@data-test='shopping-cart-link']";
+    public void clickFirstItemButton() {
+        firstItem.click();
+    }
+    public void clickiSecondItemButton() {
+        secondItem.click();
+    }
+    public void clickCartIconButton() {
+        cartIcon.click();
+    }
+    public void clickItemsDropDown() {
+        Locator options = itemsDropDown.locator("option");
+        int count = options.count();
+        System.out.println("Extracted Dropdown Items are : ");
+        Report.log(scenario,"Extracted Dropdown Items are : ");
+        for (int i = 0; i < count; i++) {
+            String optionText = options.nth(i).textContent().trim();
+            System.out.println(optionText);
+            Report.log(scenario, optionText);
+        }
+    }
 
     public void addItemsToTheCart() {
         String expectedAddedItems = "2";
-        page.click(firstItem);
-        page.click(secondItem);
-        String actualaAddedItems = page.textContent(cartIcon);
+        clickFirstItemButton();
+        clickiSecondItemButton();
+        String actualaAddedItems = cartIcon.textContent();
         log.info("User has add the items to the cart");
         Assert.assertEquals(actualaAddedItems, expectedAddedItems);
         Report.screenshot(scenario);
         Report.log(scenario, "Added items are : " + actualaAddedItems);
-        page.click(cartIcon);
+        clickCartIconButton();
     }
+
 }
