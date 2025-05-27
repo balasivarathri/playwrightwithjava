@@ -55,5 +55,4 @@ public class InventoryPage {
         Report.log(scenario, "Added items are : " + actualaAddedItems);
         clickCartIconButton();
     }
-
 }
