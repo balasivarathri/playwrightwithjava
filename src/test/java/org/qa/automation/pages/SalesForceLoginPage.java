@@ -11,7 +11,7 @@ import static org.qa.automation.base.TestBase.scenario;
 
 public class SalesForceLoginPage {
 
-    // Locators as Locator objects (better practice)
+    // Locators as Locator objects (best practice)
     private final Locator usernameInput;
     private final Locator passwordInput;
     private final Locator loginButton;
@@ -49,19 +49,19 @@ public class SalesForceLoginPage {
     }
 
 
-    public void clickCreate() throws InterruptedException {
+    public void clickCreate() {
         createLink.scrollIntoViewIfNeeded();
         createLink.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
         createLink.click();
     }
 
-    public void clickApps() throws InterruptedException {
+    public void clickApps() {
         appsLink.scrollIntoViewIfNeeded();
         appsLink.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
         appsLink.click();
     }
 
-    public void salesForceLoginTest(String url, String userName, String password) throws InterruptedException {
+    public void salesForceLoginTest(String url, String userName, String password) {
         page.navigate(Url.getUrl(url));
         enterUsername(userName);
         enterPassword(password);

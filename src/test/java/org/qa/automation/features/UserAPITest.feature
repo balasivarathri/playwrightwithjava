@@ -8,4 +8,4 @@ Feature: Validating POST, GET, PUT and DELETE API for User With JWT token
     And User should be validate all the fields and verify user has been created
     And User should be to hit the user api to get the user response
     And User should be able to update the specific user
-#    Then User should be able to delete the updated user
+    Then User should be able to delete the updated user

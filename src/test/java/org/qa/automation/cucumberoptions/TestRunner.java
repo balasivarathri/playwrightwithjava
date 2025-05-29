@@ -1,5 +1,6 @@
 package org.qa.automation.cucumberoptions;
 
+import com.microsoft.playwright.Tracing;
 import io.cucumber.junit.CucumberOptions;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.runner.RunWith;
@@ -9,6 +10,9 @@ import org.qa.automation.processor.Processor;
 import org.qa.automation.processor.TearDown;
 
 import java.io.IOException;
+import java.nio.file.Paths;
+
+import static org.qa.automation.base.TestBase.browserContext;
 
 @Slf4j
 @RunWith(CustomRunner.class)
@@ -36,6 +40,8 @@ public class TestRunner {
     public static void teardown() {
         log.warn("------ Teardown: START ------");
         Processor.initializeTeardown(executionDateTime);
+//                browserContext.tracing().stop(new Tracing.StopOptions()
+//                .setPath(Paths.get("trace.zip")));
         log.info("Teardown: END ------");
     }
 }

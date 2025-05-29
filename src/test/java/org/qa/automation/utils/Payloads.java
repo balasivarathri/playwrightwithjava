@@ -34,4 +34,12 @@ public class Payloads {
         return sb.toString();
     }
 
+    public static String bookerUserPayload(){
+        String bookeUserPayload = "{\n" +
+                "    \"username\" : \"admin\",\n" +
+                "    \"password\" : \"password123\"\n" +
+                "}";
+        return bookeUserPayload;
+    }
+
 }
