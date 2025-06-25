@@ -9,7 +9,6 @@ public class PageObjectManager {
     public InventoryPage inventoryPage;
     public CartPage cartPage;
     public CheckOutOverViewPage checkOutOverViewPage;
-    public QuilterHomePage quilterHomePage;
     public Page page;
 
     public PageObjectManager(Page page) {
@@ -32,9 +31,5 @@ public class PageObjectManager {
     public CheckOutOverViewPage checkOutOverViewPage() {
         checkOutOverViewPage = new CheckOutOverViewPage(page);
         return checkOutOverViewPage;
-    }
-    public QuilterHomePage quilterHomePage() {
-        quilterHomePage = new QuilterHomePage(page);
-        return quilterHomePage;
     }
 }
