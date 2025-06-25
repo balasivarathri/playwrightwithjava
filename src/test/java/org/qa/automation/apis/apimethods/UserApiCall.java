@@ -1,4 +1,4 @@
-package org.qa.automation.apimethods;
+package org.qa.automation.apis.apimethods;
 
 import org.qa.automation.POJO_Payloads.TokenGenerator;
 import org.qa.automation.POJO_Payloads.UsersList;

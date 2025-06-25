@@ -1,4 +1,4 @@
-package org.qa.automation.bookerapis;
+package org.qa.automation.apis.bookerapis;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -138,31 +138,27 @@ public class BookerUserApiCall extends TestBase {
     }
 
     public void updateBookerUser(int bookingid) throws IOException {
-        // Generate booking dates
         String checkin = DateUtils.generateRandomCheckinDate();
         String checkout = DateUtils.generateRandomCheckoutDate(checkin);
 
-        // Create bookingDates
         BookingPayload.BookingDates bookingDates = BookingPayload.BookingDates.builder()
                 .checkin(checkin)
                 .checkout(checkout)
                 .build();
 
-        // Create booking payload
         BookingPayload bookingPayload = BookingPayload.builder()
-                .firstname(generateRandomString().toLowerCase())
-                .lastname(generateRandomString().toLowerCase())
-                .totalprice(generateThreeDigitNumber())
+                .firstname("Neshu123")
+                .lastname("Sivathri")
+                .totalprice(131)
                 .depositpaid(true)
                 .bookingdates(bookingDates)
-                .additionalneeds("Lunch") // match Postman
+                .additionalneeds("Breakfast")
                 .build();
 
-        // Encode Basic Auth
+        // Encode Basic Auth (same as Postman)
         String credentials = "admin:password123";
         String basicAuth = Base64.getEncoder().encodeToString(credentials.getBytes());
 
-        // PUT request with Basic Auth
         apiResponse = apiRequestContext.put("https://restful-booker.herokuapp.com/booking/" + bookingid,
                 RequestOptions.create()
                         .setHeader("Content-Type", "application/json")
@@ -170,20 +166,16 @@ public class BookerUserApiCall extends TestBase {
                         .setHeader("Authorization", "Basic " + basicAuth)
                         .setData(bookingPayload));
 
-        // Extract and log response
-        String responseText = apiResponse.text();
         int statusCode = apiResponse.status();
+        String responseText = apiResponse.text();
         System.out.println("PUT Status Code: " + statusCode);
         System.out.println("PUT Response Body: " + responseText);
 
-        // Assert success
         Assert.assertEquals(200, statusCode);
 
-        // Parse JSON response
         ObjectMapper objectMapper = new ObjectMapper();
         BookingPayload responsePayload = objectMapper.readValue(responseText, BookingPayload.class);
 
-        // Validate response matches request
         Assert.assertEquals(bookingPayload.getFirstname(), responsePayload.getFirstname());
         Assert.assertEquals(bookingPayload.getLastname(), responsePayload.getLastname());
         Assert.assertEquals(bookingPayload.getTotalprice(), responsePayload.getTotalprice());
@@ -191,11 +183,8 @@ public class BookerUserApiCall extends TestBase {
         Assert.assertEquals(bookingPayload.getBookingdates(), responsePayload.getBookingdates());
         Assert.assertEquals(bookingPayload.getAdditionalneeds(), responsePayload.getAdditionalneeds());
 
-        // Optional: Custom report
         Report.validate(scenario, "Booking updated successfully", "Booking update failed", 200, statusCode);
     }
-
-
 
 
     public void deleteUser(int idNumber) {

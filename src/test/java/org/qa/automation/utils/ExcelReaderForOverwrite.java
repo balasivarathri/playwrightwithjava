@@ -36,7 +36,7 @@ public class ExcelReaderForOverwrite {
             Processor.killProcess("Error on feature file: '" + featureFilePath + "' - Unable to read excel document with path: '" + excelFilePath + "'");
         }
 
-        Object data = new ArrayList();
+        Object data = new ArrayList<>();
 
         try {
             assert excelFile != null;
@@ -64,7 +64,7 @@ public class ExcelReaderForOverwrite {
             Processor.killProcess("Error on feature file: '" + this.featureFilePath + "' - Unable to read excel document with path: '" + this.sheetName + "'");
         }
         int totalRow = ((Sheet) Objects.requireNonNull(sheet)).getPhysicalNumberOfRows();
-        List<Map<String, String>> excelRows = new ArrayList();
+        List<Map<String, String>> excelRows = new ArrayList<>();
         int headerRowNumber = this.getHeaderRowNumber(sheet);
         if (headerRowNumber != -1) {
             int totalColumn = sheet.getRow(headerRowNumber).getLastCellNum();
@@ -72,7 +72,7 @@ public class ExcelReaderForOverwrite {
 
             for (int currentRow = setCurrentRow; currentRow <= totalRow; ++currentRow) {
                 Row row = this.getRow(sheet, sheet.getFirstRowNum() + currentRow);
-                LinkedHashMap<String, String> columnMapData = new LinkedHashMap();
+                LinkedHashMap<String, String> columnMapData = new LinkedHashMap<>();
                 for (int currentColumn = 0; currentColumn < totalColumn; ++currentColumn) {
                     columnMapData.putAll(this.getCellValue(sheet, row, currentColumn));
                 }

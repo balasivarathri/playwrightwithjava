@@ -5,7 +5,6 @@ import com.microsoft.playwright.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.report.Report;
 import org.testng.Assert;
-
 import static org.qa.automation.base.TestBase.scenario;
 
 @Slf4j
@@ -43,7 +42,6 @@ public class InventoryPage {
             Report.log(scenario, optionText);
         }
     }
-
     public void addItemsToTheCart() {
         String expectedAddedItems = "2";
         clickFirstItemButton();

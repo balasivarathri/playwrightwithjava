@@ -13,15 +13,14 @@ public class Hook {
     }
 
     @Before(order = 0)
-    public void beforeScenario(Scenario scenario){
-
+    public void beforeScenario(Scenario scenario) {
         TestBase.scenario = scenario;
         log.info("------ Scenario: START ------");
         log.info("Scenario Name: " + scenario.getName());
     }
 
     @After(order = 0)
-    public void afterScenario(Scenario scenario){
+    public void afterScenario(Scenario scenario) {
         log.info("Scenarios Result: " + scenario.getStatus());
         log.info("------ Scenario: END ------");
     }

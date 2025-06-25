@@ -1,4 +1,4 @@
-package org.qa.automation.apimethods;
+package org.qa.automation.apis.apimethods;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;

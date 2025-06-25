@@ -2,6 +2,8 @@ package org.qa.automation.base;
 
 import com.microsoft.playwright.*;
 import io.cucumber.java.Scenario;
+import org.qa.automation.urls.Url;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
@@ -45,6 +47,7 @@ public class TestBase {
                 break;
         }
         browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(null));
+        browserContext.clearCookies();
         page = browserContext.newPage();
         browserContext.tracing().start(new Tracing.StartOptions()
                 .setScreenshots(true)
@@ -52,7 +55,12 @@ public class TestBase {
                 .setSources(true));
         return page;
     }
-    public APIRequestContext apiInitialization(){
+
+    public static void userUrl(String url) {
+        page.navigate(Url.getUrl(url));
+    }
+
+    public APIRequestContext apiInitialization() {
         playwright = Playwright.create();
         apiRequest = playwright.request();
         apiRequestContext = apiRequest.newContext();

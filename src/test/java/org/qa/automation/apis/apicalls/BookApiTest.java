@@ -1,4 +1,4 @@
-package org.qa.automation.apicalls;
+package org.qa.automation.apis.apicalls;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;

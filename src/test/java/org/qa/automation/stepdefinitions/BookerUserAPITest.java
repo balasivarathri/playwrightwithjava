@@ -3,9 +3,8 @@ package org.qa.automation.stepdefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import lombok.extern.slf4j.Slf4j;
-import org.qa.automation.apimethods.UserApiCall;
 import org.qa.automation.base.TestBase;
-import org.qa.automation.bookerapis.BookerUserApiCall;
+import org.qa.automation.apis.bookerapis.BookerUserApiCall;
 import org.qa.automation.contextsetup.ApiContextSetup;
 
 import java.io.IOException;

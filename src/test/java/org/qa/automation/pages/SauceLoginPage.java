@@ -5,7 +5,7 @@ import com.microsoft.playwright.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.qa.automation.base.TestBase;
 import org.qa.automation.report.Report;
-import org.qa.automation.utils.Url;
+import org.qa.automation.urls.Url;
 import org.testng.Assert;
 
 @Slf4j
@@ -55,7 +55,7 @@ public class SauceLoginPage extends TestBase {
 
     public void validateErrorMessage() {
         String actualErrorMes = errorMessage.textContent();
-        String expectedErrorMes = "Epic sadface: Sorry, this user has been locked out.";
+        String expectedErrorMes = "Epic sadface: Sorry, this user has been locked out.1";
         log.info("Actual Error Message is : " + actualErrorMes);
         Assert.assertEquals(expectedErrorMes, actualErrorMes);
         Report.log(scenario, "Actual Error Message is : " + actualErrorMes);

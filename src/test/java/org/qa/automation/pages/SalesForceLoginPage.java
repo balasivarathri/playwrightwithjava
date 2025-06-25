@@ -4,7 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import org.qa.automation.report.Report;
-import org.qa.automation.utils.Url;
+import org.qa.automation.urls.Url;
 
 import static org.qa.automation.base.TestBase.page;
 import static org.qa.automation.base.TestBase.scenario;

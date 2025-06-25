@@ -19,7 +19,6 @@ public class BookingPayload {
     private boolean depositpaid;
     private BookingDates bookingdates;
     private String additionalneeds;
-    private String bookingid;
 
     @Data
     @Builder

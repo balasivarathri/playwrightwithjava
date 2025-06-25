@@ -7,7 +7,6 @@ public class ExcelMultiline {
     public static final Logger log = LoggerFactory.getLogger(ExcelMultiline.class);
 
     public ExcelMultiline() {
-
     }
     public static String unEscapeLineBreak(String data){
         return data.replace("$$", "\n");
