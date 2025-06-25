@@ -5,7 +5,6 @@ import io.cucumber.java.en.When;
 import org.qa.automation.base.TestBase;
 import org.qa.automation.contextsetup.TestContextSetup;
 import org.qa.automation.pages.QuilterHomePage;
-import org.qa.automation.pages.ToolsqaRegistrationPage;
 import org.qa.automation.report.Report;
 
 public class QuilterTest extends TestBase {

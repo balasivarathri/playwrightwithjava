@@ -1,15 +1,12 @@
 package org.qa.automation.stepdefinitions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.microsoft.playwright.APIRequestContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.qa.automation.apis.swiftapis.SwiftPaymentPostApiCall;
 import org.qa.automation.base.TestBase;
 import org.qa.automation.contextsetup.ApiContextSetup;
-import org.qa.automation.contextsetup.TestContextSetup;
-import org.qa.automation.pages.ToolsqaRegistrationPage;
 import org.qa.automation.report.Report;
 import org.qa.automation.utils.*;
 

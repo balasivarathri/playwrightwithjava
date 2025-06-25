@@ -5,12 +5,10 @@ import org.qa.automation.pages.*;
 
 public class PageObjectManager {
 
-    public SalesForceLoginPage salesForceLoginPage;
     public SauceLoginPage sauceLoginPage;
     public InventoryPage inventoryPage;
     public CartPage cartPage;
     public CheckOutOverViewPage checkOutOverViewPage;
-    public ToolsqaRegistrationPage toolsqaRegistrationPage;
     public QuilterHomePage quilterHomePage;
     public Page page;
 
@@ -18,10 +16,6 @@ public class PageObjectManager {
         this.page = page;
     }
 
-    public SalesForceLoginPage salesForceLoginPage() {
-        salesForceLoginPage = new SalesForceLoginPage(page);
-        return salesForceLoginPage;
-    }
 
     public SauceLoginPage sauceLoginPage() {
         sauceLoginPage = new SauceLoginPage(page);
@@ -38,10 +32,6 @@ public class PageObjectManager {
     public CheckOutOverViewPage checkOutOverViewPage() {
         checkOutOverViewPage = new CheckOutOverViewPage(page);
         return checkOutOverViewPage;
-    }
-    public ToolsqaRegistrationPage toolsqaRegistrationPage() {
-        toolsqaRegistrationPage = new ToolsqaRegistrationPage(page);
-        return toolsqaRegistrationPage;
     }
     public QuilterHomePage quilterHomePage() {
         quilterHomePage = new QuilterHomePage(page);
