@@ -23,6 +23,7 @@ pipeline
             }
         }
 
+
         stage('UAT') {
 			steps {
 				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
