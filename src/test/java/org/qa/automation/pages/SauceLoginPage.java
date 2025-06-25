@@ -55,7 +55,7 @@ public class SauceLoginPage extends TestBase {
 
     public void validateErrorMessage() {
         String actualErrorMes = errorMessage.textContent();
-        String expectedErrorMes = "Epic sadface: Sorry, this user has been locked out.1";
+        String expectedErrorMes = "Epic sadface: Sorry, this user has been locked out.";
         log.info("Actual Error Message is : " + actualErrorMes);
         Assert.assertEquals(expectedErrorMes, actualErrorMes);
         Report.log(scenario, "Actual Error Message is : " + actualErrorMes);
